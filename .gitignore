@@ -1,6 +1,9 @@
 # macOS Spotlight Index
 .DS_Store
 
+# _gitignore folder
+_gitignore
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
