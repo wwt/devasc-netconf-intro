@@ -44,7 +44,7 @@ function display_intro() {
 # Windows preparation
 function setup_windows() {
     # Disable Windows Updates
-    if (!(Test-Path .winupdate -PathType leaf)) {
+    if (-not (Test-Path .winupdate -PathType leaf)) {
         Start-Process -FilePath PowerShell.exe -Verb Runas -ArgumentList "Stop-Service wuauserv; Set-Service -Name wuauserv -StartupType Disabled"
         Out-File -FilePath .winupdate
     }
@@ -83,7 +83,7 @@ function run_jupyter_launcher() {
 function setup_anx() {
     $anx_dir = Test-Path "${ROOT_PATH}\anx" -PathType Container
 
-    if (!($anx_dir)) {
+    if (-not ($anx_dir)) {
         # Clone ANX repo
         docker exec -it jupyter1 git clone https://github.com/cisco-ie/anx.git
 
