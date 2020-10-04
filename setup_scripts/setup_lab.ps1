@@ -61,7 +61,7 @@ function setup_docker() {
 
         # Remove existing Docker images
         docker rmi -f $(docker image ls -aq); docker system prune -af --volumes
-        Out-File -FilePath .winupdate
+        Out-File -FilePath .dockerclean
     }
 }
 
