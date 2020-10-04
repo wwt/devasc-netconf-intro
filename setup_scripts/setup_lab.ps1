@@ -44,7 +44,10 @@ function display_intro() {
 # Windows preparation
 function setup_windows() {
     # Disable Windows Updates
-    Start-Process -FilePath PowerShell.exe -Verb Runas -ArgumentList "Stop-Service wuauserv; Set-Service -Name wuauserv -StartupType Disabled"
+    if (!(Test-Path .winupdate -PathType leaf)) {
+        Start-Process -FilePath PowerShell.exe -Verb Runas -ArgumentList "Stop-Service wuauserv; Set-Service -Name wuauserv -StartupType Disabled"
+        Out-File -FilePath .winupdate
+    }
 }
 
 
@@ -56,7 +59,10 @@ function setup_docker() {
     Invoke-WebRequest -Uri $DOCKER_SETTINGS_URI -OutFile $settings_file
 
     # Remove existing Docker images
-    docker rmi -f $(docker image ls -aq); docker system prune -af --volumes
+    if (!(Test-Path .dockerclean -PathType leaf)) {
+        docker rmi -f $(docker image ls -aq); docker system prune -af --volumes
+        Out-File -FilePath .winupdate
+    }
 }
 
 
@@ -69,7 +75,7 @@ function run_jupyter_launcher() {
     Invoke-WebRequest -Uri $JUPYTER_SCRIPT_URI -OutFile $JUPYTER_SCRIPT
 
     # Run Jupyter Launcher Script
-    ".\" + $JUPYTER_SCRIPT
+    Invoke-Expression .\$JUPYTER_SCRIPT
 }
 
 
@@ -79,7 +85,7 @@ function setup_anx() {
     docker exec -it jupyter1 git clone https://github.com/cisco-ie/anx.git
 
     # Build & start ANX
-    cd anx
+    cd "${ROOT_PATH}\anx"
     docker-compose up -d
     Start-Sleep -Seconds 5
 
