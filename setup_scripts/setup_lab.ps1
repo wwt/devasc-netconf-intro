@@ -81,13 +81,17 @@ function run_jupyter_launcher() {
 
 # Setup ANX
 function setup_anx() {
-    # Clone ANX repo
-    docker exec -it jupyter1 git clone https://github.com/cisco-ie/anx.git
+    $anx_dir = Test-Path "${ROOT_PATH}\anx" -PathType Container
 
-    # Build & start ANX
-    cd "${ROOT_PATH}\anx"
-    docker-compose up -d
-    Start-Sleep -Seconds 5
+    if (!($anx_dir)) {
+        # Clone ANX repo
+        docker exec -it jupyter1 git clone https://github.com/cisco-ie/anx.git
+
+        # Build & start ANX
+        Set-Location "${ROOT_PATH}\anx"
+        docker-compose up -d
+        Start-Sleep -Seconds 5
+    }
 
     # Launch ANX in Chrome
     Write-Host "Opening ANX..." -NoNewline
