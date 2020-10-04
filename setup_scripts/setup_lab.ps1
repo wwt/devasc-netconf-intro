@@ -52,8 +52,8 @@ function setup_windows() {
 function setup_docker() {
     # Disable Docker Desktop updates
     $settings_file = $DOCKER_SETTINGS_FILE_PATH + $DOCKER_SETTINGS_FILE
-    Rename-Item -Path $settings_file -NewName $settings_file + ".old"
-    Invoke-WebRequest -Uri $DOCKER_SETTINGS_URI + $DOCKER_SETTINGS_FILE -OutFile $settings_file
+    Rename-Item -Path $settings_file -NewName "${settings_file}.old" -ErrorAction SilentlyContinue
+    Invoke-WebRequest -Uri $DOCKER_SETTINGS_URI -OutFile $settings_file
 
     # Remove existing Docker images
     docker rmi -f $(docker image ls -aq); docker system prune -af --volumes
@@ -141,7 +141,6 @@ function display_exit() {
 
 # Main execution
 function main() {
-    check_lab_status
     display_intro
     setup_windows
     setup_docker
