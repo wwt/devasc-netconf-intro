@@ -45,8 +45,12 @@ function display_intro() {
 function setup_windows() {
     # Disable Windows Updates
     if (-not (Test-Path .winupdate -PathType leaf)) {
+        Write-Host "Disabling Windows Update..." -NoNewline -ForegroundColor Green
+        Write-Host ""
         Start-Process -FilePath PowerShell.exe -Verb Runas -ArgumentList "Stop-Service wuauserv; Set-Service -Name wuauserv -StartupType Disabled"
         Out-File -FilePath .winupdate
+        Write-Host ""
+        Write-Host "done." -ForegroundColor Green
     }
 }
 
@@ -55,19 +59,27 @@ function setup_windows() {
 function setup_docker() {
     if (!(Test-Path .dockerclean -PathType leaf)) {
         # Disable Docker Desktop updates
+        Write-Host "Disabling Docker Desktop updates..." -ForegroundColor Green
+        Write-Host ""
         $settings_file = $DOCKER_SETTINGS_FILE_PATH + $DOCKER_SETTINGS_FILE
         Rename-Item -Path $settings_file -NewName "${settings_file}.old" -ErrorAction SilentlyContinue
         Invoke-WebRequest -Uri $DOCKER_SETTINGS_URI -OutFile $settings_file
+        Write-Host "done." -ForegroundColor Green
 
         # Remove existing Docker images
+        Write-Host "Removing existing Docker Images..." -NoNewline -ForegroundColor Green
         docker rmi -f $(docker image ls -aq); docker system prune -af --volumes
         Out-File -FilePath .dockerclean
+        Write-Host ""
+        Write-Host "done." -ForegroundColor Green
     }
 }
 
 
 # Run Jupyter Launcher
 function run_jupyter_launcher() {
+    Write-Host "Downloading scripts..." -NoNewline -ForegroundColor Green
+    Write-Host ""
     # Download .repo file
     Invoke-WebRequest -Uri $REPO_FILE_URI -OutFile $REPO_FILE
 
@@ -76,11 +88,15 @@ function run_jupyter_launcher() {
 
     # Run Jupyter Launcher Script
     Invoke-Expression .\$JUPYTER_SCRIPT
+    Write-Host ""
+    Write-Host "done." -ForegroundColor Green
 }
 
 
 # Setup ANX
 function setup_anx() {
+    Write-Host "Cloning ANX repository..." -ForegroundColor Green
+    Write-Host ""
     $anx_dir = Test-Path "${ROOT_PATH}\anx" -PathType Container
 
     if (-not ($anx_dir)) {
@@ -97,6 +113,7 @@ function setup_anx() {
     Write-Host "Opening ANX..." -NoNewline
     try {
         Start-Process "chrome.exe" "${ANX_URL}"
+        Write-Host ""
         Write-Host "done."
     }
     catch {
