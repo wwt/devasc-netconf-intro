@@ -41,10 +41,12 @@ function display_intro() {
 }
 
 function docker_status() {
-    Write-Host "Checking Docker service & process status..." -NoNewline
+    Write-Host "Checking Docker service & process status..." -NoNewline -ForegroundColor Green
+    Write-Host ""
     $docker_service_status = Get-Service -DisplayName "Docker*" | Where-Object {$_.Status -eq "Running"}
     $docker_process_status = docker info | Select-String -Pattern 'error' | ForEach-Object {$_.Matches.Success}
-    Write-Host "done."
+    Write-Host ""
+    Write-Host "done." -ForegroundColor Green
 
     if (-not ($docker_service_status)) {
         handle_error("Docker Desktop Windows service not running. `nPlease wait for the service to start and try again.")
