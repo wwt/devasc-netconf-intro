@@ -42,11 +42,10 @@ function display_intro() {
 
 function docker_status() {
     Write-Host "Checking Docker service & process status..." -NoNewline -ForegroundColor Green
-    Write-Host ""
     $docker_service_status = Get-Service -DisplayName "Docker*" | Where-Object {$_.Status -eq "Running"}
     $docker_process_status = docker info | Select-String -Pattern 'error' | ForEach-Object {$_.Matches.Success}
-    Write-Host ""
     Write-Host "done." -ForegroundColor Green
+    Write-Host ""
 
     if (-not ($docker_service_status)) {
         handle_error("Docker Desktop Windows service not running. `nPlease wait for the service to start and try again.")
@@ -62,11 +61,10 @@ function setup_windows() {
     # Disable Windows Updates
     if (-not (Test-Path .winupdate -PathType leaf)) {
         Write-Host "Disabling Windows Update..." -NoNewline -ForegroundColor Green
-        Write-Host ""
         Start-Process -FilePath PowerShell.exe -Verb Runas -ArgumentList "Stop-Service wuauserv; Set-Service -Name wuauserv -StartupType Disabled"
         Out-File -FilePath .winupdate
-        Write-Host ""
         Write-Host "done." -ForegroundColor Green
+        Write-Host ""
     }
 }
 
@@ -88,6 +86,7 @@ function setup_docker() {
         Out-File -FilePath .dockerclean
         Write-Host ""
         Write-Host "done." -ForegroundColor Green
+        Write-Host ""
     }
 }
 
@@ -95,7 +94,6 @@ function setup_docker() {
 # Run Jupyter Launcher
 function run_jupyter_launcher() {
     Write-Host "Downloading scripts..." -NoNewline -ForegroundColor Green
-    Write-Host ""
     # Download .repo file
     Invoke-WebRequest -Uri $REPO_FILE_URI -OutFile $REPO_FILE
 
@@ -104,8 +102,8 @@ function run_jupyter_launcher() {
 
     # Run Jupyter Launcher Script
     Invoke-Expression .\$JUPYTER_SCRIPT
-    Write-Host ""
     Write-Host "done." -ForegroundColor Green
+    Write-Host ""
 }
 
 
