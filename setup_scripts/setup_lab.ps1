@@ -40,6 +40,20 @@ function display_intro() {
     Start-Sleep -Seconds 1
 }
 
+function docker_status() {
+    Write-Host "Checking Docker service & process status..." -NoNewline
+    $docker_service_status = Get-Service -DisplayName "Docker*" | Where-Object {$_.Status -eq "Running"}
+    $docker_process_status = docker info | Select-String -Pattern 'error' | ForEach-Object {$_.Matches.Success}
+    Write-Host "done."
+
+    if (-not ($docker_service_status)) {
+        handle_error("Docker Desktop Windows service not running. `nPlease wait for the service to start and try again.")
+    }
+
+    if ($docker_process_status) {
+        handle_error("Docker Desktop process not running. `nPlease make sure Docker Desktop is running.")
+    }
+}
 
 # Windows preparation
 function setup_windows() {
@@ -169,6 +183,7 @@ function display_exit() {
 # Main execution
 function main() {
     display_intro
+    docker_status
     setup_windows
     setup_docker
     run_jupyter_launcher
