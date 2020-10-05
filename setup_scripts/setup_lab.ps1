@@ -61,7 +61,7 @@ function setup_windows() {
     # Disable Windows Updates & delete temporary update files
     if (-not (Test-Path .winupdate -PathType leaf)) {
         Write-Host "Disabling Windows Update..." -NoNewline -ForegroundColor Green
-        Start-Process -FilePath PowerShell.exe -Verb Runas -ArgumentList "Stop-Service wuauserv; Set-Service -Name wuauserv -StartupType Disabled; Get-ChildItem -Path C:\WINDOWS\SoftwareDistribution\Download -File | Remove-Item > $null"
+        Start-Process -FilePath PowerShell.exe -Verb Runas -ArgumentList "Stop-Service wuauserv; Set-Service -Name wuauserv -StartupType Disabled; Get-ChildItem -Path C:\WINDOWS\SoftwareDistribution\Download -Verbose | Remove-Item -Force -Confirm:`$false -Recurse -ErrorAction SilentlyContinue"
         Out-File -FilePath .winupdate
         Write-Host "done." -ForegroundColor Green
         Write-Host ""
@@ -79,6 +79,7 @@ function setup_docker() {
         Rename-Item -Path $settings_file -NewName "${settings_file}.old" -ErrorAction SilentlyContinue
         Invoke-WebRequest -Uri $DOCKER_SETTINGS_URI -OutFile $settings_file
         Write-Host "done." -ForegroundColor Green
+        Write-Host ""
 
         # Remove existing Docker images
         Write-Host "Removing existing Docker Images..." -NoNewline -ForegroundColor Green
@@ -93,6 +94,7 @@ function setup_docker() {
 
 # Run Jupyter Launcher
 function run_jupyter_launcher() {
+    Write-Host ""
     Write-Host "Downloading scripts..." -NoNewline -ForegroundColor Green
     # Download .repo file
     Invoke-WebRequest -Uri $REPO_FILE_URI -OutFile $REPO_FILE
@@ -122,13 +124,14 @@ function setup_anx() {
         docker-compose up -d
         Start-Sleep -Seconds 5
     }
+    Write-Host "done." -ForegroundColor Green
+    Write-Host ""
 
     # Launch ANX in Chrome
-    Write-Host "Opening ANX..." -NoNewline
+    Write-Host "Opening ANX..." -NoNewline -ForegroundColor Green
     try {
         Start-Process "chrome.exe" "${ANX_URL}"
-        Write-Host ""
-        Write-Host "done."
+        Write-Host "done." -ForegroundColor Green
     }
     catch {
         handle_error("Unable to launch Chrome, you may manually navigate to the URL: `n${ANX_URL}.")
