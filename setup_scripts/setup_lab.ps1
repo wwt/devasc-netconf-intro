@@ -113,7 +113,7 @@ function run_jupyter_launcher() {
 
 
 function validate_git_repo() {
-    Set-Location "${ROOT_PATH}\${REPO_NAME}"
+    Set-Location $ROOT_PATH
     if (-not (Test-Path $REPO_NAME -PathType Container)) {
         handle_error("Aborting due to failed Git Clone.")
     }
