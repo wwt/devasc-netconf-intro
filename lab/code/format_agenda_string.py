@@ -30,6 +30,10 @@ print('** Python Data **')
 pprint(py_data)
 print()
 
+print('** "items" Python Object Type **')
+print(type(py_data['root']['agenda']['items']))
+print()
+
 print('** "item" Python Object Type **')
 print(type(py_data['root']['agenda']['items']['item']))
 print()
