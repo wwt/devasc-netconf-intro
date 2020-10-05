@@ -55,9 +55,9 @@ The lab setup process is almost entirely automated and leverages the **Cisco CSR
 
 5. Click the PowerShell icon in the task bar to open a new PowerShell window.  Then, copy the entire command below, **right-click** in the PowerShell window to the command, and press your *Return/Enter* key to run the command:
 
-   ```powershell
+```powershell
 Set-Executionpolicy -Scope CurrentUser -ExecutionPolicy UnRestricted -Force; Set-Location \Users\admin; Invoke-WebRequest -Uri 'https://devnet-netconf.s3.us-east-2.amazonaws.com/setup_lab.ps1' -OutFile 'setup_lab.ps1’; .\setup_lab.ps1
-   ```
+```
 
 
 ![5_paste_command](_images/5_paste_command.png)
