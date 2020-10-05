@@ -73,8 +73,7 @@ function setup_windows() {
 function setup_docker() {
     if (!(Test-Path .dockerclean -PathType leaf)) {
         # Disable Docker Desktop updates
-        Write-Host "Disabling Docker Desktop updates..." -ForegroundColor Green
-        Write-Host ""
+        Write-Host "Disabling Docker Desktop updates..." -NoNewline -ForegroundColor Green
         $settings_file = $DOCKER_SETTINGS_FILE_PATH + $DOCKER_SETTINGS_FILE
         Rename-Item -Path $settings_file -NewName "${settings_file}.old" -ErrorAction SilentlyContinue
         Invoke-WebRequest -Uri $DOCKER_SETTINGS_URI -OutFile $settings_file
@@ -82,7 +81,7 @@ function setup_docker() {
         Write-Host ""
 
         # Remove existing Docker images
-        Write-Host "Removing existing Docker Images..." -NoNewline -ForegroundColor Green
+        Write-Host "Removing existing Docker Images..." -ForegroundColor Green
         docker rmi -f $(docker image ls -aq); docker system prune -af --volumes
         Out-File -FilePath .dockerclean
         Write-Host ""
