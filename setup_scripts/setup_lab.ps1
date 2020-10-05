@@ -111,19 +111,20 @@ function run_jupyter_launcher() {
 
 # Setup ANX
 function setup_anx() {
-    Write-Host "Cloning ANX repository..." -ForegroundColor Green
-    Write-Host ""
     $anx_dir = Test-Path "${ROOT_PATH}\anx" -PathType Container
 
+    # Clone ANX repo
     if (-not ($anx_dir)) {
-        # Clone ANX repo
+        Write-Host "Cloning ANX repository..." -ForegroundColor Green
+        Write-Host ""
         docker exec -it jupyter1 git clone https://github.com/cisco-ie/anx.git
-
-        # Build & start ANX
-        Set-Location "${ROOT_PATH}\anx"
-        docker-compose up -d
-        Start-Sleep -Seconds 10
     }
+
+    # Build & start ANX
+    Set-Location "${ROOT_PATH}\anx"
+    docker-compose up -d
+    Start-Sleep -Seconds 10
+
     Write-Host "done." -ForegroundColor Green
     Write-Host ""
 
@@ -162,7 +163,7 @@ function create_shortcuts(){
     # Relaunch lab link
     Write-Host ""
     Write-Host "Creating desktop shortcut to restart the lab..." -NoNewline -ForegroundColor Green
-    create_link_obj("Restart Lab.lnk")("powershell.exe")($JUPYTER_SCRIPT)
+    create_link_obj("Restart Lab.lnk")("powershell.exe")("setup_lab.ps1")
     Write-Host "done" -ForegroundColor Green
 
     # ANX Explorer link
