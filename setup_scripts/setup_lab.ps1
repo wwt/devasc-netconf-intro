@@ -121,7 +121,7 @@ function setup_anx() {
         # Build & start ANX
         Set-Location "${ROOT_PATH}\anx"
         docker-compose up -d
-        Start-Sleep -Seconds 5
+        Start-Sleep -Seconds 10
     }
     Write-Host "done." -ForegroundColor Green
     Write-Host ""
