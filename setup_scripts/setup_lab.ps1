@@ -58,10 +58,10 @@ function docker_status() {
 
 # Windows preparation
 function setup_windows() {
-    # Disable Windows Updates
+    # Disable Windows Updates & delete temporary update files
     if (-not (Test-Path .winupdate -PathType leaf)) {
         Write-Host "Disabling Windows Update..." -NoNewline -ForegroundColor Green
-        Start-Process -FilePath PowerShell.exe -Verb Runas -ArgumentList "Stop-Service wuauserv; Set-Service -Name wuauserv -StartupType Disabled"
+        Start-Process -FilePath PowerShell.exe -Verb Runas -ArgumentList "Stop-Service wuauserv; Set-Service -Name wuauserv -StartupType Disabled; Get-ChildItem -Path C:\WINDOWS\SoftwareDistribution\Download -File | Remove-Item > $null"
         Out-File -FilePath .winupdate
         Write-Host "done." -ForegroundColor Green
         Write-Host ""
