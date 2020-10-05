@@ -23,6 +23,7 @@ function handle_error($error_message=$False) {
     else {
         Write-Warning "An unknown error occurred - please try again."
     }
+    Start-Sleep -Seconds 5
     Write-Host ""
     exit
 }
