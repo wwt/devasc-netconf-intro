@@ -47,6 +47,7 @@ function docker_status() {
     $docker_service_status = Get-Service -DisplayName "Docker*" | Where-Object {$_.Status -eq "Running"}
     $docker_process_status = docker info | Select-String -Pattern 'error' | ForEach-Object {$_.Matches.Success}
     Write-Host "done." -ForegroundColor Green
+    Write-Host ""
 
     if (-not ($docker_service_status)) {
         handle_error("Docker Desktop Windows service not running. `nPlease wait for the service to start and try again.")
@@ -63,7 +64,7 @@ function setup_windows() {
     # Disable Windows Updates & delete temporary update files
     if (-not (Test-Path .winupdate -PathType leaf)) {
         Write-Host "Disabling Windows Update..." -NoNewline -ForegroundColor Green
-        Start-Process -FilePath PowerShell.exe -Verb Runas -ArgumentList "Stop-Service wuauserv; Set-Service -Name wuauserv -StartupType Disabled; Get-ChildItem -Path C:\WINDOWS\SoftwareDistribution\Download -Verbose | Remove-Item -Force -Confirm:`$false -Recurse -ErrorAction SilentlyContinue"
+        Start-Process PowerShell -WindowStyle Minimized -Verb Runas -ArgumentList "Stop-Service wuauserv; Set-Service -Name wuauserv -StartupType Disabled; Get-ChildItem -Path C:\WINDOWS\SoftwareDistribution\Download -Verbose | Remove-Item -Force -Confirm:`$false -Recurse -ErrorAction SilentlyContinue"
         Out-File -FilePath .winupdate
         Write-Host "done." -ForegroundColor Green
         Write-Host ""
