@@ -8,6 +8,7 @@ $DOCKER_SETTINGS_URI = $S3_BUCKET_URI + $DOCKER_SETTINGS_FILE
 $DOCKER_SETTINGS_FILE_PATH = "c:\Users\admin\AppData\Roaming\Docker\"
 $REPO_FILE = ".repo"
 $REPO_FILE_URI = $S3_BUCKET_URI + $REPO_FILE
+$REPO_NAME = "devasc-netconf-intro"
 $JUPYTER_SCRIPT = "jupyter_launcher.ps1"
 $JUPYTER_SCRIPT_URI = $S3_BUCKET_URI + $JUPYTER_SCRIPT
 $ROOT_PATH = "C:\Users\admin"
@@ -111,6 +112,13 @@ function run_jupyter_launcher() {
 }
 
 
+function validate_git_repo() {
+    if (-not (Test-Path $REPO_NAME -PathType Container)) {
+        handle_error("Aborting due to failed Git Clone.")
+    }
+}
+
+
 # Setup ANX
 function setup_anx() {
     $anx_dir = Test-Path "${ROOT_PATH}\anx" -PathType Container
@@ -193,6 +201,7 @@ function main() {
     setup_windows
     setup_docker
     run_jupyter_launcher
+    validate_git_repo
     setup_anx
     create_shortcuts
     display_exit
