@@ -33,7 +33,7 @@ function display_intro() {
     Write-Host ""
     write-Host $FRAME
     Write-Host "** Setting up the NETCONF Lab **" -ForegroundColor Green
-    Write-Host "** This will take about 5 minutes, please wait **" -ForegroundColor Green
+    Write-Host "** This will take 5-10 minutes, please wait **" -ForegroundColor Green
     write-Host $FRAME
     Write-Host ""
 
