@@ -31,25 +31,25 @@ The lab setup process is almost entirely automated and leverages the **Cisco CSR
 
 1. Launch a new copy of the [][Programmability Foundations Lab](https://www.wwt.com/lab/programmability-foundations-lab) and click [View Labs](https://www.wwt.com/my-wwt/labs):
 
-![1_launch_lab](_images/1_launch_lab.png)
+![2_launch_lab](_images/2_launch_lab.png)
 
 
 
 2. From the [My Labs](https://www.wwt.com/my-wwt/labs) page, click **Access Lab**:
 
-![2_access_lab](_images/2_access_lab.png)
+![3_access_lab](_images/3_access_lab.png)
 
 
 
 3. Click the **Open in ATC Lab Gateway** button:
 
-![3_open_lab](_images/3_open_lab.png)
+![4_open_lab](_images/4_open_lab.png)
 
 
 
 4. Close the two **Docker Update** windows and wait for the Windows notification which reads **Docker Desktop is running**:
 
-![4_wait_for_docker](_images/4_wait_for_docker.png)
+![5_wait_for_docker](_images/5_wait_for_docker.png)
 
 
 
@@ -60,32 +60,32 @@ Set-Executionpolicy -Scope CurrentUser -ExecutionPolicy UnRestricted -Force; Set
 ```
 
 
-![5_paste_command](_images/5_paste_command.png)
+![6_paste_command](_images/6_paste_command.png)
 
 
 
 6. When prompted, click **Yes** to allow PowerShell to make changes to Windows:
 
-![6_uac](_images/6_uac.png)
+![7_uac](_images/7_uac.png)
 
 
 
 7. After a few minutes, when prompted, enter your standard GitHub username and **substitute your PAT for your password**.
    - **Right-click** in the PowerShell window to paste your GitHub PAT:
 
-![7_git_credentials](_images/7_git_credentials.png)
+![8_git_credentials](_images/8_git_credentials.png)
 
 
 
 8. A Chrome browser will open JupyterLab when the lab is ready to use.  Open the folder **devasc-netconf-intro**:
 
-![8_jupyter_nav_1](_images/8_jupyter_nav_1.png)
+![9_jupyter_nav_1](_images/9_jupyter_nav_1.png)
 
 
 
 9. Open the **lab** folder and follow the instructions in the Jupyter Notebook **ncclient.ipynb** to go through the lab exercises:
 
-![9_jupyter_nav_2](_images/9_jupyter_nav_2.png)
+![10_jupyter_nav_2](_images/10_jupyter_nav_2.png)
 
 
 
@@ -93,7 +93,7 @@ Set-Executionpolicy -Scope CurrentUser -ExecutionPolicy UnRestricted -Force; Set
    - This shortcut **only** re-launches JupyterLab, which takes a few seconds, and does not restart the 5-10 minute lab configuration process.
    - **You will NOT lose any of your lab progress **.
 
-![10_jupyter_restart](_images/10_jupyter_restart.png)
+![11_jupyter_restart](_images/11_jupyter_restart.png)
 
 
 
