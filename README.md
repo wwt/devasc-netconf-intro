@@ -18,7 +18,7 @@ The **Lab Setup** section has step-by-step directions to help you access the lea
 
 *GitHub PAT SSO Setup*:
 
-![1_setup_pat_sso](../dcauto-nxos-off-box/_images/1_setup_pat_sso.png)
+![1_setup_pat_sso](_images/1_setup_pat_sso.png)
 
 ---
 
