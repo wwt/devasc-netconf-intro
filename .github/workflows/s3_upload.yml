@@ -7,7 +7,7 @@ jobs:
   upload:
     runs-on: ubuntu-latest
     env:
-      LOCAL_PATH: config/*
+      LOCAL_PATH: config/
       AWS_BUCKET: devasc-netconf
     steps:
       - name: Checkout Code
@@ -23,4 +23,5 @@ jobs:
 
       - name: Upload Config Folder Contents
         run: |
-          s3cmd put ${{ env.LOCAL_PATH }} s3://${{ env.AWS_BUCKET }} --acl-public
+          s3cmd --acl-public --recursive \
+          put ${{ env.LOCAL_PATH }} s3://${{ env.AWS_BUCKET }}
