@@ -2,15 +2,16 @@
 
 # Constants
 $FRAME = "-" * 49
-$S3_BUCKET_URI = "https://devnet-netconf.s3.us-east-2.amazonaws.com/"
+$S3_BUCKET_URI = "https://devasc-netconf.s3-us-west-2.amazonaws.com/"
 $DOCKER_SETTINGS_FILE = "settings.json"
 $DOCKER_SETTINGS_URI = $S3_BUCKET_URI + $DOCKER_SETTINGS_FILE
 $DOCKER_SETTINGS_FILE_PATH = "c:\Users\admin\AppData\Roaming\Docker\"
 $REPO_FILE = ".repo"
 $REPO_FILE_URI = $S3_BUCKET_URI + $REPO_FILE
 $REPO_NAME = "devasc-netconf-intro"
+$JUPYTER_S3_BUCKET_URI = "https://jupyter-launcher.s3-us-west-2.amazonaws.com/"
 $JUPYTER_SCRIPT = "jupyter_launcher.ps1"
-$JUPYTER_SCRIPT_URI = $S3_BUCKET_URI + $JUPYTER_SCRIPT
+$JUPYTER_SCRIPT_URI = $JUPYTER_S3_BUCKET_URI + $JUPYTER_SCRIPT
 $ROOT_PATH = "C:\Users\admin"
 $ANX_URL = "http://localhost:9269"
 
