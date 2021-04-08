@@ -17,6 +17,7 @@ jobs:
         uses: s3-actions/s3cmd@v1.1
         with:
           provider: aws
+          region: US
           access_key: ${{ secrets.S3_ACCESS_KEY }}
           secret_key: ${{ secrets.S3_SECRET_KEY }}
 
