@@ -17,8 +17,8 @@ jobs:
         uses: s3-actions/s3cmd@v1.1
         with:
           provider: aws
-          access-key: ${{ secrets.S3_ACCESS_KEY }}
-          secret: ${{ secrets.S3_SECRET_KEY }}
+          access_key: ${{ secrets.S3_ACCESS_KEY }}
+          secret_key: ${{ secrets.S3_SECRET_KEY }}
 
       - name: Upload File
         run: |
