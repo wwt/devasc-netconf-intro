@@ -1,0 +1,25 @@
+---
+name: S3 File Upload
+on:
+  push:
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    env:
+      LOCAL_FILE: setup_scripts/setup_lab.ps1
+      AWS_BUCKET: devasc-netconf
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Setup s3cmd
+        uses: s3-actions/s3cmd@v1.1
+        with:
+          provider: aws
+          access-key: ${{ secrets.S3_ACCESS_KEY }}
+          secret: ${{ secrets.S3_SECRET_KEY }}
+
+      - name: Upload File
+        run: |
+          s3cmd put ${{ env.LOCAL_FILE }} s3://${{ env.AWS_BUCKET }} --acl-public
