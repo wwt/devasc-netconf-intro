@@ -192,7 +192,7 @@ function create_link_obj($link_name, $link_target, $command=$False){
 }
 
 
-# Create links to relaunch lab & launch ANX
+# Create links to relaunch lab & launch YANG Suite
 function create_shortcuts(){
     # Relaunch lab link
     Write-Host ""
@@ -200,10 +200,10 @@ function create_shortcuts(){
     create_link_obj("Restart Lab.lnk")("powershell.exe")("setup_lab.ps1")
     Write-Host "done" -ForegroundColor Green
 
-    # ANX Explorer link
+    # YANG Suite Explorer link
     Write-Host ""
-    Write-Host "Creating desktop shortcut to launch ANX..." -NoNewline -ForegroundColor Green
-    create_link_obj("ANX.url")($ANX_URL)
+    Write-Host "Creating desktop shortcut to launch YANG Suite..." -NoNewline -ForegroundColor Green
+    create_link_obj("YANG Suite.url")($YANG_SUITE_URL)
     Write-Host "done" -ForegroundColor Green
 }
 
@@ -226,7 +226,7 @@ function main() {
     setup_docker
     run_jupyter_launcher
     validate_git_repo
-    setup_anx
+    setup_yang_suite
     create_shortcuts
     display_exit
 }
