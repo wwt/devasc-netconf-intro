@@ -13,7 +13,7 @@ $JUPYTER_S3_BUCKET_URI = "https://jupyter-launcher.s3-us-west-2.amazonaws.com/"
 $JUPYTER_SCRIPT = "jupyter_launcher.ps1"
 $JUPYTER_SCRIPT_URI = $JUPYTER_S3_BUCKET_URI + $JUPYTER_SCRIPT
 $ROOT_PATH = "C:\Users\admin"
-$ANX_URL = "http://localhost:9269"
+$YANG_SUITE_URL = "http://localhost"
 
 
 # Handle errors
@@ -121,35 +121,57 @@ function validate_git_repo() {
 }
 
 
-# Setup ANX
-function setup_anx() {
-    $anx_dir = Test-Path "${ROOT_PATH}\anx" -PathType Container
+# Setup YANG Suite
+function setup_yang_suite() {
+    # Pull YANG Suite Images
 
-    # Clone ANX repo
-    if (-not ($anx_dir)) {
-        Write-Host "Cloning ANX repository..." -ForegroundColor Green
-        Write-Host ""
-        docker exec -it jupyter1 git clone https://github.com/cisco-ie/anx.git
-    }
+    # Import YANG Suite Images
 
-    # Build & start ANX
-    Set-Location "${ROOT_PATH}\anx"
-    docker-compose up -d
-    Start-Sleep -Seconds 10
+    # Start YANG Suite Images
 
-    Write-Host "done." -ForegroundColor Green
-    Write-Host ""
-
-    # Launch ANX in Chrome
-    Write-Host "Opening ANX..." -NoNewline -ForegroundColor Green
+    # Import YANG Suite self-signed certificate
+    
+    # Launch YANG Suite in Chrome
+    Write-Host "Opening YANG Suite..." -NoNewline -ForegroundColor Green
     try {
-        Start-Process "chrome.exe" "${ANX_URL}"
+        Start-Process "chrome.exe" "${YANG_SUITE_URL}"
         Write-Host "done." -ForegroundColor Green
     }
     catch {
-        handle_error("Unable to launch Chrome, you may manually navigate to the URL: `n${ANX_URL}.")
+        handle_error("Unable to launch Chrome, you may manually navigate to the URL: `n${YANG_SUITE_URL}.")
     }
 }
+
+
+# # Setup ANX
+# function setup_anx() {
+#     $anx_dir = Test-Path "${ROOT_PATH}\anx" -PathType Container
+
+#     # Clone ANX repo
+#     if (-not ($anx_dir)) {
+#         Write-Host "Cloning ANX repository..." -ForegroundColor Green
+#         Write-Host ""
+#         docker exec -it jupyter1 git clone https://github.com/cisco-ie/anx.git
+#     }
+
+#     # Build & start ANX
+#     Set-Location "${ROOT_PATH}\anx"
+#     docker-compose up -d
+#     Start-Sleep -Seconds 10
+
+#     Write-Host "done." -ForegroundColor Green
+#     Write-Host ""
+
+#     # Launch ANX in Chrome
+#     Write-Host "Opening ANX..." -NoNewline -ForegroundColor Green
+#     try {
+#         Start-Process "chrome.exe" "${ANX_URL}"
+#         Write-Host "done." -ForegroundColor Green
+#     }
+#     catch {
+#         handle_error("Unable to launch Chrome, you may manually navigate to the URL: `n${ANX_URL}.")
+#     }
+# }
 
 
 # Create link file object
