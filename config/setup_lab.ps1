@@ -61,7 +61,7 @@ function docker_status() {
         Write-Host "Checking Docker service & process statuses..." -NoNewline -ForegroundColor Green
         Write-Host ""
         $docker_service_status = Get-Service -DisplayName "Docker*" | Where-Object {$_.Status -eq "Running"}
-        $docker_process_status = docker info | Select-String -Pattern 'error' | ForEach-Object {$_.Matches.Success}
+        $docker_process_status = docker info | Select-String -Pattern 'ERROR' | ForEach-Object {$_.Matches.Success}
         Write-Host "done." -ForegroundColor Green
         Write-Host ""
 
