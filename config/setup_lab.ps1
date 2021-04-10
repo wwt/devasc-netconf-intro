@@ -170,6 +170,7 @@ function setup_yang_suite() {
         if (-not ($yang_suite_dir)) {
             docker exec -it jupyter1 git clone $YANG_SUITE_REPO
         }
+        Write-Host ""
         Write-Host "done." -ForegroundColor Green
         Write-Host ""
     }
@@ -185,7 +186,7 @@ function setup_yang_suite() {
         $loop_count = 1
         foreach ($image in $YANG_SUITE_IMAGES) {
             Write-Host ""
-            Write-Host "Pulling Image ${loop_count} of ${total_images}"
+            Write-Host "Pulling Image ${loop_count} of ${total_images}" -ForegroundColor Green
                 docker pull $image
             Write-Host ""
             $loop_count += 1
