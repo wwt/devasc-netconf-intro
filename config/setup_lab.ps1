@@ -22,8 +22,10 @@ $YANG_SUITE_IMAGES = @(
     "${DOCKER_REGISTRY_PATH}yang-suite-yangsuite-1"
 )
 $YANG_SUITE_REPO = "https://github.com/CiscoDevNet/yangsuite"
-$YANG_SUITE_URL = "http://localhost"
+$YANG_SUITE_URL = "https://localhost"
 
+# Force PowerShell to catch all errors in try/catch blocks
+$ErrorActionPreference = "Stop"
 
 # Handle errors
 function handle_error($error_message=$False) {
@@ -176,13 +178,14 @@ function setup_yang_suite() {
     }
 
     # Pull YANG Suite Images
-    Write-Host "Loading ${YANG_SUITE_IMAGES.length} YANG Suite Docker Images..." -NoNewline -ForegroundColor Green
+    $total_images = $YANG_SUITE_IMAGES.length
+    Write-Host "Loading ${total_images} YANG Suite Docker Images..." -NoNewline -ForegroundColor Green
     Write-Host ""
     try {
         $loop_count = 1
         foreach ($image in $YANG_SUITE_IMAGES) {
             Write-Host ""
-            Write-Host "Pulling Image ${loop_count} of ${YANG_SUITE_IMAGES.length}"
+            Write-Host "Pulling Image ${loop_count} of ${total_images}"
                 docker pull $image
             Write-Host ""
             $loop_count += 1
@@ -198,7 +201,8 @@ function setup_yang_suite() {
     Write-Host "Importing Docker Compose file..." -NoNewline -ForegroundColor Green
     Write-Host ""
     try {
-        $docker_compose_file = "${yang_suite_dir}\docker\" + $DOCKER_COMPOSE_FILE
+        $docker_compose_path = "${ROOT_PATH}\yangsuite\docker\"
+        $docker_compose_file = $docker_compose_path + $DOCKER_COMPOSE_FILE
         Rename-Item -Path $docker_compose_file -NewName "${docker_compose_file}.old" -ErrorAction SilentlyContinue
         Invoke-WebRequest -Uri $DOCKER_COMPOSE_URI -OutFile $docker_compose_file
         Write-Host "done." -ForegroundColor Green
@@ -212,7 +216,7 @@ function setup_yang_suite() {
     Write-Host "Starting YANG Suite Containers..." -NoNewline -ForegroundColor Green
     Write-Host ""
     try {
-        Set-Location "${yang_suite_dir}\docker"
+        Set-Location "${docker_compose_path}"
         docker-compose up -d
         Start-Sleep -Seconds 10
         Write-Host "done." -ForegroundColor Green
@@ -231,6 +235,9 @@ function setup_yang_suite() {
     }
     catch {
         handle_error("Unable to launch Chrome, you may manually navigate to the URL: `n${YANG_SUITE_URL}.")
+    }
+    finally {
+        Set-Location $ROOT_PATH
     }
 }
 
