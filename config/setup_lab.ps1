@@ -198,7 +198,7 @@ function setup_yang_suite() {
     Write-Host "Importing Docker Compose file..." -NoNewline -ForegroundColor Green
     Write-Host ""
     try {
-        $docker_compose_file = "${yang_suite_dir}\docker" + $DOCKER_COMPOSE_FILE
+        $docker_compose_file = "${yang_suite_dir}\docker\" + $DOCKER_COMPOSE_FILE
         Rename-Item -Path $docker_compose_file -NewName "${docker_compose_file}.old" -ErrorAction SilentlyContinue
         Invoke-WebRequest -Uri $DOCKER_COMPOSE_URI -OutFile $docker_compose_file
         Write-Host "done." -ForegroundColor Green
