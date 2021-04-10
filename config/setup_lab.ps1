@@ -101,7 +101,7 @@ function setup_docker() {
     try {
         if (!(Test-Path .dockerclean -PathType leaf)) {
             # Disable Docker Desktop updates
-            Write-Host "Disabling Docker Desktop updates..." -NoNewline -ForegroundColor Green
+            Write-Host "Configuring Docker settings..." -NoNewline -ForegroundColor Green
             Write-Host ""
             $settings_file = $DOCKER_SETTINGS_FILE_PATH + $DOCKER_SETTINGS_FILE
             Rename-Item -Path $settings_file -NewName "${settings_file}.old" -ErrorAction SilentlyContinue
@@ -128,7 +128,7 @@ function setup_docker() {
 # Run Jupyter Launcher
 function run_jupyter_launcher() {
     # Download and execute Jupyter Launcher
-    Write-Host "Downloading scripts..." -NoNewline -ForegroundColor Green
+    Write-Host "Setting up JupyterLab..." -NoNewline -ForegroundColor Green
     Write-Host ""
     try {
         # Download .repo file
@@ -143,12 +143,12 @@ function run_jupyter_launcher() {
         Write-Host ""
     }
     catch {
-        handle_error("Unable to download scripts, please try again.")
+        handle_error("Unable to setup JupyterLab, please try again.")
     }
 }
 
 
-# Validate the Git clone operation of the lab repo
+# Confirm a successful clone operation of the lab repo
 function validate_git_repo() {
     Set-Location $ROOT_PATH
     if (-not (Test-Path $REPO_NAME -PathType Container)) {
