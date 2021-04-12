@@ -228,7 +228,7 @@ function setup_yang_suite() {
     }
     
     # Launch YANG Suite in Chrome
-    Write-Host "Opening YANG Suite..." -NoNewline -ForegroundColor Green
+    Write-Host "Opening YANG Suite in a Chrome browser window..." -NoNewline -ForegroundColor Green
     try {
         Start-Process -FilePath "chrome.exe" -ArgumentList "$CHROME_ARGS $YANG_SUITE_URL"
         Write-Host "done." -ForegroundColor Green
