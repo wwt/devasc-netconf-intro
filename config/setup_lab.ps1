@@ -3,6 +3,7 @@
 # Constants
 $FRAME = "-" * 49
 $S3_BUCKET_URI = "https://devasc-netconf.s3-us-west-2.amazonaws.com/"
+$CHROME_ARGS = "--allow-insecure-localhost"
 $DOCKER_COMPOSE_FILE = "docker-compose.yml"
 $DOCKER_COMPOSE_URI = $S3_BUCKET_URI + $DOCKER_COMPOSE_FILE
 $DOCKER_REGISTRY_PATH = "lab-docker.wwtatc.com/devnet/"
@@ -127,7 +128,8 @@ function setup_docker() {
 # Run Jupyter Launcher
 function run_jupyter_launcher() {
     # Download and execute Jupyter Launcher
-    Write-Host "Setting up JupyterLab..." -NoNewline -ForegroundColor Green
+    Write-Host "Setting up JupyterLab..." -ForegroundColor Green
+    Write-Host ""
     try {
         # Download .repo file
         Invoke-WebRequest -Uri $REPO_FILE_URI -OutFile $REPO_FILE
@@ -177,7 +179,7 @@ function setup_yang_suite() {
 
     # Pull YANG Suite Images
     $total_images = $YANG_SUITE_IMAGES.length
-    Write-Host "Loading ${total_images} YANG Suite Docker Images..." -NoNewline -ForegroundColor Green
+    Write-Host "Loading ${total_images} YANG Suite Docker Images..." -ForegroundColor Green
     Write-Host ""
     try {
         $loop_count = 1
@@ -188,6 +190,7 @@ function setup_yang_suite() {
             Write-Host ""
             $loop_count += 1
         }
+        Write-Host ""
         Write-Host "...loaded YANG Suite Docker Images." -ForegroundColor Green
         Write-Host ""
     }
@@ -197,7 +200,6 @@ function setup_yang_suite() {
 
     # Import custom Docker Compose file
     Write-Host "Importing Docker Compose file..." -NoNewline -ForegroundColor Green
-    Write-Host ""
     try {
         $docker_compose_path = "${ROOT_PATH}\yangsuite\docker\"
         $docker_compose_file = $docker_compose_path + $DOCKER_COMPOSE_FILE
@@ -228,7 +230,7 @@ function setup_yang_suite() {
     # Launch YANG Suite in Chrome
     Write-Host "Opening YANG Suite..." -NoNewline -ForegroundColor Green
     try {
-        Start-Process "chrome.exe" "${YANG_SUITE_URL}" -WindowStyle Minimized
+        Start-Process -FilePath "chrome.exe" -ArgumentList "$CHROME_ARGS $YANG_SUITE_URL"
         Write-Host "done." -ForegroundColor Green
     }
     catch {
@@ -279,7 +281,7 @@ function display_exit() {
     Write-Host ""
     Write-Host $FRAME
     Write-Host "** Setup complete **" -ForegroundColor Green
-    Write-Host "** Switch to the minimized Chrome browser to start the lab **" -ForegroundColor Yellow
+    Write-Host "** Switch to the open Chrome browser to start the lab **" -ForegroundColor Yellow
     Write-Host $FRAME
     Write-Host ""
 }
