@@ -71,11 +71,25 @@ function docker_status() {
         }
 
         if ($docker_process_status) {
-            handle_error("Docker Desktop process not running. `nPlease make sure Docker Desktop is running.")
+            # If Docker Deskop process is hung, attempt to kill
+            # $docker_process = Get-Process "Docker Desktop"
+            # if ($docker_process.Count -gt 0) {
+            #     $docker_process[0].Kill()
+            #     $docker_process[0].WaitForExit()
+            # }
+
+            # If Docker Desktop process does not respond, attempt to start
+            Start-Process "C:\Program Files\Docker\Docker\Docker Desktop.exe"
+            Write-Host "Docker Desktop process not running, attempting restart..." -NoNewline -ForegroundColor Yellow
+            Start-Sleep 15
+            Write-Host "done." -ForegroundColor Yellow
+            Write-Host
+
+            handle_error("Docker Desktop process was not running, restart automatically attempted. `nPlease try again.")
         }
     }
     catch {
-        handle_error("Unable to determine the Docker service and process statuses , please try again.")
+        handle_error("Unable to determine the Docker service and process statuses, please try again.")
     }
 }
 
@@ -292,7 +306,7 @@ function display_exit() {
 function main() {
     display_intro
     docker_status
-    setup_windows
+    # setup_windows
     setup_docker
     run_jupyter_launcher
     validate_git_repo
