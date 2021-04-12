@@ -79,13 +79,13 @@ function docker_status() {
             # }
 
             # If Docker Desktop process does not respond, attempt to start
-            # Start-Process "C:\Program Files\Docker\Docker\Docker Desktop.exe"
-            # Write-Host "Docker Desktop process not running, attempting restart..." -NoNewline -ForegroundColor Yellow
-            # Start-Sleep 15
-            # Write-Host "done." -ForegroundColor Yellow
-            # Write-Host
+            Start-Process "C:\Program Files\Docker\Docker\Docker Desktop.exe"
+            Write-Host "Docker Desktop process not running, attempting restart..." -NoNewline -ForegroundColor Yellow
+            Start-Sleep 15
+            Write-Host "done." -ForegroundColor Yellow
+            Write-Host
 
-            handle_error("The Docker Desktop process encountered an unrecoverable error. `nPlease launch a new copy of the lab and try again.")
+            handle_error("Docker Desktop process was not running, restart automatically attempted. `nPlease try again.  If the problem persists, launch a new copy of the lab.")
         }
     }
     catch {
