@@ -22,6 +22,7 @@ $YANG_SUITE_IMAGES = @(
     "${DOCKER_REGISTRY_PATH}yang-suite-nginx-1",
     "${DOCKER_REGISTRY_PATH}yang-suite-yangsuite-1"
 )
+$YANG_SUITE_LAUNCH_DELAY = 15
 $YANG_SUITE_REPO = "https://github.com/CiscoDevNet/yangsuite"
 $YANG_SUITE_URL = "https://localhost"
 
@@ -218,7 +219,7 @@ function setup_yang_suite() {
     try {
         Set-Location "${docker_compose_path}"
         docker-compose up -d
-        Start-Sleep -Seconds 10
+        Start-Sleep -Seconds $YANG_SUITE_LAUNCH_DELAY
         Write-Host ""
         Write-Host "...YANG Suite Containers started." -ForegroundColor Green
         Write-Host ""
