@@ -59,7 +59,6 @@ function display_intro() {
 function docker_status() {
     try {
         Write-Host "Checking Docker service & process statuses..." -NoNewline -ForegroundColor Green
-        Write-Host ""
         $docker_service_status = Get-Service -DisplayName "Docker*" | Where-Object {$_.Status -eq "Running"}
         $docker_process_status = docker info | Select-String -Pattern 'ERROR' | ForEach-Object {$_.Matches.Success}
         Write-Host "done." -ForegroundColor Green
@@ -85,7 +84,6 @@ function setup_windows() {
     try {
         if (-not (Test-Path .winupdate -PathType leaf)) {
             Write-Host "Disabling Windows Update..." -NoNewline -ForegroundColor Green
-            Write-Host ""
             Start-Process PowerShell -WindowStyle Minimized -Verb Runas -ArgumentList "Stop-Service wuauserv; Set-Service -Name wuauserv -StartupType Disabled; Get-ChildItem -Path C:\WINDOWS\SoftwareDistribution\Download -Verbose | Remove-Item -Force -Confirm:`$false -Recurse -ErrorAction SilentlyContinue"
             Out-File -FilePath .winupdate
             Write-Host "done." -ForegroundColor Green
@@ -104,7 +102,6 @@ function setup_docker() {
         if (!(Test-Path .dockerclean -PathType leaf)) {
             # Disable Docker Desktop updates
             Write-Host "Configuring Docker settings..." -NoNewline -ForegroundColor Green
-            Write-Host ""
             $settings_file = $DOCKER_SETTINGS_FILE_PATH + $DOCKER_SETTINGS_FILE
             Rename-Item -Path $settings_file -NewName "${settings_file}.old" -ErrorAction SilentlyContinue
             Invoke-WebRequest -Uri $DOCKER_SETTINGS_URI -OutFile $settings_file
@@ -117,7 +114,7 @@ function setup_docker() {
             docker rmi -f $(docker image ls -aq); docker system prune -af --volumes
             Out-File -FilePath .dockerclean
             Write-Host ""
-            Write-Host "done." -ForegroundColor Green
+            Write-Host "...existing docker images removed." -ForegroundColor Green
             Write-Host ""
         }
     }
@@ -131,7 +128,6 @@ function setup_docker() {
 function run_jupyter_launcher() {
     # Download and execute Jupyter Launcher
     Write-Host "Setting up JupyterLab..." -NoNewline -ForegroundColor Green
-    Write-Host ""
     try {
         # Download .repo file
         Invoke-WebRequest -Uri $REPO_FILE_URI -OutFile $REPO_FILE
@@ -141,7 +137,8 @@ function run_jupyter_launcher() {
 
         # Run Jupyter Launcher Script
         Invoke-Expression .\$JUPYTER_SCRIPT
-        Write-Host "done." -ForegroundColor Green
+        Write-Host ""
+        Write-Host "...JupyterLab setup complete." -ForegroundColor Green
         Write-Host ""
     }
     catch {
@@ -171,7 +168,7 @@ function setup_yang_suite() {
             docker exec -it jupyter1 git clone $YANG_SUITE_REPO
         }
         Write-Host ""
-        Write-Host "done." -ForegroundColor Green
+        Write-Host "...YANG Suite repository cloned." -ForegroundColor Green
         Write-Host ""
     }
     catch {
@@ -191,7 +188,7 @@ function setup_yang_suite() {
             Write-Host ""
             $loop_count += 1
         }
-        Write-Host "done." -ForegroundColor Green
+        Write-Host "...loaded YANG Suite Docker Images." -ForegroundColor Green
         Write-Host ""
     }
     catch {
@@ -214,13 +211,14 @@ function setup_yang_suite() {
     }
 
     # Start YANG Suite Containers
-    Write-Host "Starting YANG Suite Containers..." -NoNewline -ForegroundColor Green
+    Write-Host "Starting YANG Suite Containers..." -ForegroundColor Green
     Write-Host ""
     try {
         Set-Location "${docker_compose_path}"
         docker-compose up -d
         Start-Sleep -Seconds 10
-        Write-Host "done." -ForegroundColor Green
+        Write-Host ""
+        Write-Host "...YANG Suite Containers started." -ForegroundColor Green
         Write-Host ""
     }
     catch {
@@ -229,9 +227,8 @@ function setup_yang_suite() {
     
     # Launch YANG Suite in Chrome
     Write-Host "Opening YANG Suite..." -NoNewline -ForegroundColor Green
-    Write-Host ""
     try {
-        Start-Process "chrome.exe" "${YANG_SUITE_URL}"
+        Start-Process "chrome.exe" "${YANG_SUITE_URL}" -WindowStyle Minimized
         Write-Host "done." -ForegroundColor Green
     }
     catch {
@@ -282,6 +279,7 @@ function display_exit() {
     Write-Host ""
     Write-Host $FRAME
     Write-Host "** Setup complete **" -ForegroundColor Green
+    Write-Host "** Switch to the minimized Chrome browser to start the lab **" -ForegroundColor Yellow
     Write-Host $FRAME
     Write-Host ""
 }
