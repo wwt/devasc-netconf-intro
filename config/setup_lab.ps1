@@ -24,6 +24,8 @@ $YANG_SUITE_IMAGES = @(
 )
 $YANG_SUITE_LAUNCH_DELAY = 15
 $YANG_SUITE_REPO = "https://github.com/CiscoDevNet/yangsuite"
+$YANG_SUITE_SETTINGS_FILE = "ys-data.zip"
+$YANG_SUITE_SETTINGS_URI = $S3_BUCKET_URI + $YANG_SUITE_SETTINGS_FILE
 $YANG_SUITE_URL = "https://localhost"
 
 # Force PowerShell to catch all errors in try/catch blocks
@@ -175,7 +177,7 @@ function validate_git_repo() {
 
 # Setup YANG Suite
 function setup_yang_suite() {
-    # Clone Yang Suite repo
+    # Clone YANG Suite repo
     Write-Host "Cloning YANG Suite repository..." -ForegroundColor Green
     Write-Host ""
     try {
@@ -190,6 +192,25 @@ function setup_yang_suite() {
     }
     catch {
         handle_error("Unable to clone YANG Suite repository, please try again.")
+    }
+    
+    try {
+        # Download custom configuration data
+        Write-Host "Downloading YANG Suite settings..." -NoNewline -ForegroundColor Green
+        $yang_suite_settings_path = "${ROOT_PATH}\yangsuite\docker"
+        $yang_suite_settings = "${yang_suite_settings_path}\${YANG_SUITE_SETTINGS_FILE}"
+        Invoke-WebRequest -Uri $YANG_SUITE_SETTINGS_URI -OutFile $yang_suite_settings
+        Write-Host "done." -ForegroundColor Green
+        Write-Host ""
+
+        # Unzip custom configuration data file
+        Write-Host "Applying YANG Suite settings..." -NoNewline -ForegroundColor Green
+        Expand-Archive -LiteralPath $yang_suite_settings -DestinationPath $yang_suite_settings_path -Force
+        Write-Host "done." -ForegroundColor Green
+        Write-Host ""
+    }
+    catch {
+        handle_error("Unable to download and apply YANG Suite settings, please try again.")
     }
 
     # Pull YANG Suite Images
