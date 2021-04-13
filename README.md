@@ -27,9 +27,9 @@ The **Lab Setup** section of this document has step-by-step directions to help y
 
 The lab setup process is almost entirely automated and leverages the **Cisco CSR 1000v devices** in the WWT [Programmability Foundations Lab](https://www.wwt.com/lab/programmability-foundations-lab). 
 
-:clock1: **Plan for the automated lab setup to take 5-10 minutes**.  Follow these steps to setup the lab environment:
+:clock1:  **Plan for the automated lab setup to take 5-10 minutes**.  Follow these steps to setup the lab environment:
 
-1. Launch a new copy of the [][Programmability Foundations Lab](https://www.wwt.com/lab/programmability-foundations-lab) and click [View Labs](https://www.wwt.com/my-wwt/labs):
+1. Launch a new copy of the [Programmability Foundations Lab](https://www.wwt.com/lab/programmability-foundations-lab) and click [View Labs](https://www.wwt.com/my-wwt/labs):
 
 ![2_launch_lab](_images/2_launch_lab.png)
 
@@ -48,14 +48,14 @@ The lab setup process is almost entirely automated and leverages the **Cisco CSR
 
 
 4. Click the System Tray icon and mouse over the **Docker icon** to reveal the status.
-   - :clock1: The icon may take a minute or so to appear.
+   - :clock1:  The icon may take a minute or so to appear.
 
 ![5_wait_for_docker](_images/5_wait_for_docker.png)
 
 
 
 5. The Docker service is ready when a small exclamation point appears over the **Docker icon**.
-   - :clock1: It may be a few minutes before the Docker service is ready
+   - :clock1:  It may be a few minutes before the Docker service is ready
 
 ![6_docker_startup_complete](_images/6_docker_startup_complete.png)
 
@@ -73,7 +73,8 @@ The lab setup process is almost entirely automated and leverages the **Cisco CSR
 
 
 
-6. Click the PowerShell icon in the task bar to open a new PowerShell window.  Then, copy the entire command below to your clipboard, **right-click** in the PowerShell window to paste the command, and press your *Return/Enter* key to run the command:
+6. A PowerShell script will customize the lab environment automatically although and you need to paste a long command into a PowerShell window in order to start that process.
+   - Click the PowerShell icon in the task bar to open a new PowerShell window.  Then, copy the entire command below to your clipboard, **right-click** in the PowerShell window to paste the command, and press your *Return/Enter* key to run the command:
 
 ```powershell
 Set-Executionpolicy -Scope CurrentUser -ExecutionPolicy UnRestricted -Force; Set-Location \Users\admin; Invoke-WebRequest -Uri 'https://devasc-netconf.s3-us-west-2.amazonaws.com/setup_lab.ps1' -OutFile 'setup_lab.ps1’; .\setup_lab.ps1
@@ -84,13 +85,13 @@ Set-Executionpolicy -Scope CurrentUser -ExecutionPolicy UnRestricted -Force; Set
 
 
 
- :bangbang:If the PowerShell script exits with a message indicating that the **Docker process is not started**, refer to the **Troubleshooting** section at the bottom of this document .
+ :bangbang: If the PowerShell script exits with a message indicating that the **Docker process is not started**, refer to the **Troubleshooting** section at the bottom of this document .
 
 
 
 7. After a few minutes, when prompted, enter your standard GitHub username.
    
-   -  :heavy_exclamation_mark:When prompted, **substitute your PAT for your password**.:heavy_exclamation_mark:
+   -  :heavy_exclamation_mark: When prompted, **substitute your PAT for your password**.:heavy_exclamation_mark:
    
    - **Right-click** in the PowerShell window to paste your GitHub PAT:
 
@@ -129,7 +130,7 @@ Set-Executionpolicy -Scope CurrentUser -ExecutionPolicy UnRestricted -Force; Set
     
       :bangbang: You do **not** need to log on to YANG Suite at this time.
     
-    - :white_check_mark: The automated lab setup should be complete and the PowerShell window will display a message to indicate whether or not setup was successful.
+    - :white_check_mark:  The automated lab setup should be complete and the PowerShell window will display a message to indicate whether or not setup was successful.
 
 ![13_yang_suite_login](_images/13_yang_suite_login.png)
 
@@ -141,7 +142,7 @@ Set-Executionpolicy -Scope CurrentUser -ExecutionPolicy UnRestricted -Force; Set
     - The **Restart Lab** shortcut re-launches JupyterLab (including the Chrome browser tab), which takes a few seconds, and does not restart the entire 5-10 minute lab configuration process.
     - The YANG Suite shortcut will reopen the YANG Suite Chrome browser tab.
 
-:large_orange_diamond: **Double-clicking these links will NOT cause you to lose any of your lab progress **:large_orange_diamond:
+:large_orange_diamond:  **Double-clicking these links will NOT cause you to lose any of your lab progress ** :large_orange_diamond:
 
 ![14_lab_restart](_images/14_lab_restart.png)
 
