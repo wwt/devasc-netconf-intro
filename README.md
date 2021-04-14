@@ -8,17 +8,8 @@ This repo will guide you through hands-on Model-Driven Programmability (MDP) NET
 
 The **Lab Setup** section of this document has step-by-step directions to help you access the learning materials using [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/getting_started/overview.html) within the WWT [Programmability Foundations Lab](https://www.wwt.com/lab/programmability-foundations-lab).
 
-:bangbang: ​Note - this lab requires that you have a **GitHub *Personal Access Token (PAT)*** available with ***repo*** scope permissions. 
-
-* You will authenticate to GitHub using your standard GitHub username and substitute your PAT for your password.
-* Directions to setup a PAT are here -  [GitHub Personal Access Token Setup](https://docs.github.com/en/enterprise/2.15/user/articles/creating-a-personal-access-token-for-the-command-line).
-* If you are a WWT employee, be sure to **enable SSO** for your PAT.
 
 
-
-*GitHub PAT SSO Setup*:
-
-![1_setup_pat_sso](_images/1_setup_pat_sso.png)
 
 ---
 
@@ -89,42 +80,32 @@ Set-Executionpolicy -Scope CurrentUser -ExecutionPolicy UnRestricted -Force; Set
 
 
 
-7. After a few minutes, when prompted, enter your standard GitHub username.
-   
-   -  :heavy_exclamation_mark: When prompted, **substitute your PAT for your password**.:heavy_exclamation_mark:
-   
-   - **Right-click** in the PowerShell window to paste your GitHub PAT:
-
-![8_git_credentials](_images/8_git_credentials.png)
-
-
-
-8. Within a few minutes, when the lab is ready to use, a Chrome browser will open a **JupyterLab** URL.
+7. :clock1:  Within a few minutes, when the lab is ready to use, a Chrome browser will open a **JupyterLab** URL.
    - Open the folder **devasc-netconf-intro**.
 
 ![9_jupyter_nav_1](_images/9_jupyter_nav_1.png)
 
 
 
-9. Next, open the **lab** folder.
+8. Next, open the **lab** folder.
 
 ![10_jupyter_nav_2](_images/10_jupyter_nav_2.png)
 
 
 
-10. Open the **Jupyter Notebook** file named **ncclient.ipynb**
+9. Open the **Jupyter Notebook** file named **ncclient.ipynb**
 
 ![11_jupyter_nav_3](_images/11_jupyter_nav_3.png)
 
 
 
-11. The NETCONF lab walkthrough guide will open and JupyterLab deployed correctly.
+10. The NETCONF lab walkthrough guide will open and JupyterLab deployed correctly.
 
 ![12_jupyter_nav_4](_images/12_jupyter_nav_4.png)
 
 
 
-12. The PowerShell script will continue to run, behind the Chrome browser window, and deploy the **YANG Suite** application.
+11. The PowerShell script will continue to run, behind the Chrome browser window, and deploy the **YANG Suite** application.
     
     - When the YANG Suite deployment completes, a second Chrome browser tab will open.
     
@@ -136,8 +117,7 @@ Set-Executionpolicy -Scope CurrentUser -ExecutionPolicy UnRestricted -Force; Set
 
 
 
-
-13. The setup process creates a two shortcuts on the Windows desktop which will help you restore the lab environment, in the event the Chrome tab closes, Windows restarts, etc.
+12. The setup process creates a two shortcuts on the Windows desktop which will help you restore the lab environment, in the event the Chrome tab closes, Windows restarts, etc.
 
     - The **Restart Lab** shortcut re-launches JupyterLab (including the Chrome browser tab), which takes a few seconds, and does not restart the entire 5-10 minute lab configuration process.
     - The YANG Suite shortcut will reopen the YANG Suite Chrome browser tab.
@@ -149,6 +129,8 @@ Set-Executionpolicy -Scope CurrentUser -ExecutionPolicy UnRestricted -Force; Set
 
 
 ---
+
+
 
 ## Docker Troubleshooting
 
