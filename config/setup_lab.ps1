@@ -202,7 +202,12 @@ function setup_yang_suite() {
         Invoke-WebRequest -Uri $YANG_SUITE_SETTINGS_URI -OutFile $yang_suite_settings -ErrorAction SilentlyContinue
         Write-Host "done." -ForegroundColor Green
         Write-Host ""
+    }
+    catch {
+        handle_error("Unable to download YANG Suite settings, please try again.")
+    }
 
+    try {
         # Unzip custom configuration data file
         Write-Host "Applying YANG Suite settings..." -NoNewline -ForegroundColor Green
         Expand-Archive -LiteralPath $yang_suite_settings -DestinationPath $yang_suite_settings_path -Force - ErrorAction -SilentlyContinue
@@ -210,7 +215,8 @@ function setup_yang_suite() {
         Write-Host ""
     }
     catch {
-        handle_error("Unable to download and apply YANG Suite settings, please try again.")
+        Write-Warning "Unable to apply YANG Suite settings."
+        Write-Host ""
     }
 
     # Pull YANG Suite Images
