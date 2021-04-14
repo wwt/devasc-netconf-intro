@@ -205,7 +205,7 @@ function setup_yang_suite() {
 
         # Unzip custom configuration data file
         Write-Host "Applying YANG Suite settings..." -NoNewline -ForegroundColor Green
-        Expand-Archive -LiteralPath $yang_suite_settings -DestinationPath $yang_suite_settings_path -Force
+        Expand-Archive -LiteralPath $yang_suite_settings -DestinationPath $yang_suite_settings_path -Force - ErrorAction -SilentlyContinue
         Write-Host "done." -ForegroundColor Green
         Write-Host ""
     }
