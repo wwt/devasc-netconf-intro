@@ -199,7 +199,7 @@ function setup_yang_suite() {
         Write-Host "Downloading YANG Suite settings..." -NoNewline -ForegroundColor Green
         $yang_suite_settings_path = "${ROOT_PATH}\yangsuite\docker"
         $yang_suite_settings = "${yang_suite_settings_path}\${YANG_SUITE_SETTINGS_FILE}"
-        Invoke-WebRequest -Uri $YANG_SUITE_SETTINGS_URI -OutFile $yang_suite_settings
+        Invoke-WebRequest -Uri $YANG_SUITE_SETTINGS_URI -OutFile $yang_suite_settings -ErrorAction SilentlyContinue
         Write-Host "done." -ForegroundColor Green
         Write-Host ""
 
