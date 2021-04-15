@@ -210,13 +210,13 @@ function setup_yang_suite() {
     try {
         # Unzip custom configuration data file
         Write-Host "Applying YANG Suite settings..." -NoNewline -ForegroundColor Green
-        Expand-Archive -LiteralPath $yang_suite_settings -DestinationPath $yang_suite_settings_path -Force - ErrorAction -SilentlyContinue
+        Expand-Archive -LiteralPath $yang_suite_settings -DestinationPath $yang_suite_settings_path -ErrorAction SilentlyContinue
         Write-Host "done." -ForegroundColor Green
         Write-Host ""
     }
     catch {
         Write-Warning "Unable to apply YANG Suite settings."
-        Write-Host ""
+        Write-Host $test
     }
 
     # Pull YANG Suite Images
@@ -257,9 +257,10 @@ function setup_yang_suite() {
     # Start YANG Suite Containers
     Write-Host "Starting YANG Suite Containers..." -ForegroundColor Green
     Write-Host ""
+    
     try {
-        Set-Location "${docker_compose_path}"
-        docker-compose up -d
+        docker-compose -f $docker_compose_file down
+        docker-compose -f $docker_compose_file up -d --force-recreate
         Start-Sleep -Seconds $YANG_SUITE_LAUNCH_DELAY
         Write-Host ""
         Write-Host "...YANG Suite Containers started." -ForegroundColor Green
@@ -277,9 +278,6 @@ function setup_yang_suite() {
     }
     catch {
         handle_error("Unable to launch Chrome, you may manually navigate to the URL: `n${YANG_SUITE_URL}.")
-    }
-    finally {
-        Set-Location $ROOT_PATH
     }
 }
 
