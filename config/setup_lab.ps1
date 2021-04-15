@@ -216,7 +216,6 @@ function setup_yang_suite() {
     }
     catch {
         Write-Warning "Unable to apply YANG Suite settings."
-        Write-Host $test
     }
 
     # Pull YANG Suite Images
