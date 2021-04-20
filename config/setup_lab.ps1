@@ -1,4 +1,4 @@
-# Script to configure Programmability FOundations lab for DEVASC NETCONF lab
+# Script to configure Programmability Foundations lab for DEVASC NETCONF lab
 
 # Constants
 $FRAME = "-" * 49
