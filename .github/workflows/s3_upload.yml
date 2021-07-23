@@ -2,6 +2,7 @@
 name: S3 File Upload
 on:
   push:
+  workflow_dispatch:
 
 jobs:
   upload:
