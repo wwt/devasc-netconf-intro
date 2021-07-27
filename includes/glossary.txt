@@ -1,0 +1,22 @@
+*[ACI]: Cisco Application Centric Infrastructure
+*[API]: Application Programming Interface
+*[APIs]: Application Programming Interfaces
+*[CLI]: Command Line Interface
+*[DNA]: Cisco Digital Network Architecture
+*[DNA]: Cisco DNA Center
+*[HTTP]: Hypertext Transfer Protocol
+*[HTTPS]: Hypertext Transfer Protocol Secure
+*[IDE]: Integrated Development Environment
+*[IT]: Information Technology
+*[JSON]: JavaScript Object Notation
+*[PyPI]: Python Package Index
+*[REPL]: Read Evaluate Print Loop
+*[REST]: Representational State Transfer
+*[SD-WAN]: Software-Defined Wide Area Network
+*[SSH]: Secure Shell
+*[UI]: User Interface
+*[URI]: Uniform Resource Identifier
+*[URL]: Uniform Resource Locator
+*[TLS]: Transport Layer Security
+*[XML]: eXtensible Markup Language
+*[YAML]: YAML Ain't Markup Language

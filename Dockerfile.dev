@@ -1,0 +1,23 @@
+# DevNet Associate NETCONF Intro Development Dockerfile
+FROM python:3.9-slim-buster
+
+LABEL \
+    maintainer='Tim Hull <tim.hull@wwt.com>' \
+    version='1.0'
+
+# Expose TCP 8000 for MkDocs server
+EXPOSE 8000/TCP
+
+# Expose TCP 8888 for JupyterLab server
+EXPOSE 8888/TCP
+
+# Update repositories and install curl
+RUN apt-get update && \
+    apt-get -y install curl git
+
+# Install Python packages
+RUN python -m pip install --upgrade pip && \
+    python -m pip install -r requirements/requirements_dev.txt
+
+# Start the bash shell at container startup
+CMD ["/bin/bash"]

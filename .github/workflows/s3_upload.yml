@@ -1,4 +1,5 @@
 ---
+# Upload lab setup script to AWS S3
 name: S3 File Upload
 on:
   push:
@@ -8,12 +9,14 @@ jobs:
   upload:
     runs-on: ubuntu-latest
     env:
+      # Environment variables to set upload path and target AWS S3 bucket
       LOCAL_PATH: config/
       AWS_BUCKET: devasc-netconf
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
 
+      # Setup credentials and parameters for AWS S3 commands
       - name: Setup s3cmd
         uses: s3-actions/s3cmd@v1.1
         with:
@@ -22,6 +25,7 @@ jobs:
           access_key: ${{ secrets.S3_ACCESS_KEY }}
           secret_key: ${{ secrets.S3_SECRET_KEY }}
 
+      # s3cmd syntak to upload the LOCAL_PATH directory to AWS Se
       - name: Upload Config Folder Contents
         run: |
           s3cmd --acl-public --recursive \

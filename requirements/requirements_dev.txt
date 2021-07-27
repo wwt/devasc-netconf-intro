@@ -1,0 +1,9 @@
+# MkDocs packages
+mkdocs
+mkdocs-material
+
+# Python packages
+flake8
+ipython
+requests
+yamllint
