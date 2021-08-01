@@ -5,5 +5,6 @@ mkdocs-material
 # Python packages
 flake8
 ipython
+jupyterlab
 requests
 yamllint
