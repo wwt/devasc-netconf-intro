@@ -3,21 +3,27 @@
 *[APIs]: Application Programming Interfaces
 *[CLI]: Command Line Interface
 *[DNA]: Cisco Digital Network Architecture
-*[DNA]: Cisco DNA Center
+*[DNAC]: Cisco DNA Center
 *[HTTP]: Hypertext Transfer Protocol
 *[HTTPS]: Hypertext Transfer Protocol Secure
 *[IDE]: Integrated Development Environment
+*[IETF]: Internet Engineering Task Force
 *[IT]: Information Technology
 *[JSON]: JavaScript Object Notation
+*[MDP]: Model-Driven Programmability
 *[NETCONF]: Network Configuration Protocol
 *[PyPI]: Python Package Index
 *[REPL]: Read Evaluate Print Loop
 *[REST]: Representational State Transfer
+*[RFC]: Request for Comment
+*[RPC]: Remote Procedure Call
 *[SD-WAN]: Software-Defined Wide Area Network
 *[SSH]: Secure Shell
 *[UI]: User Interface
 *[URI]: Uniform Resource Identifier
 *[URL]: Uniform Resource Locator
 *[TLS]: Transport Layer Security
+*[WWT]: World Wide Technology
 *[XML]: eXtensible Markup Language
 *[YAML]: YAML Ain't Markup Language
+*[YANG]: Yet Another Next Generation

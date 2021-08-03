@@ -6,5 +6,7 @@ mkdocs-material
 flake8
 ipython
 jupyterlab
+ncclient
 requests
+xmltodict
 yamllint
