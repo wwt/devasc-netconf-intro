@@ -9,6 +9,7 @@
 *[IDE]: Integrated Development Environment
 *[IT]: Information Technology
 *[JSON]: JavaScript Object Notation
+*[NETCONF]: Network Configuration Protocol
 *[PyPI]: Python Package Index
 *[REPL]: Read Evaluate Print Loop
 *[REST]: Representational State Transfer

@@ -4,8 +4,8 @@ site_url: "https://wwt.github.io/devasc-netconf-intro"
 nav:
   - Home:
     - Index: index.md
-  # - Page 1:
-    # - First Section: sections/section_1.md
+  # - Lab Exercises:
+  #   - Hands-On Lab Setup: sections/section_1.md
 
 # Repository
 repo_name: "wwt/devasc-netconf-intro"

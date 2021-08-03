@@ -1,113 +1,21 @@
-# DEVASC Model-Driven Programmability
+# Cisco DevNet Associate NETCONF Introduction Hands-On Lab Guide
 
-## Introduction to NETCONF
+![cisco-devnet-specialist](docs/images/logos/cisco-devnet-associate.png "Cisco DevNet Associate Logo")
 
 ## Overview
 
-This repo will guide you through hands-on Model-Driven Programmability (MDP) NETCONF exercises with Cisco CSR1000v devices.  The excercsies support the learning objectives in sections 3.8, 5.1, 5.10, and 5.11 in the [Cisco DEVASC exam topics](https://learningnetwork.cisco.com/s/devnet-associate-exam-topics).
+What's the big fuss over IT automation?  Well, more than anything, the excitement is about the sorts of things that you _don't_ have to do when automation is on your side.  Things like _not_ having to either copy and paste configuration changes to dozens (maybe hundreds) of different systems or repeat the same click, click, click, click, click-through-the-UI marathon over, and over, and over..._every single time_ there's a need to make a bulk change :rage:.
 
-The **Lab Setup** section of this document has step-by-step directions to help you access the learning materials using [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/getting_started/overview.html) within the WWT [Programmability Foundations Lab](https://www.wwt.com/lab/programmability-foundations-lab).
+To automate configuration and management workflows for network devices, we need to learn to write some form of automation-specific code, and the **NETCONF** protocol makes that possible.  **NETCONF** provides a programmatic way to automate the network device workflows based on the predictable data structures found in YANG models.
 
----
+This guide will walk you through some hands-on exercises that help teach and give you a place to practice using Python to automate workflows with **NETCONF**.  You'll get the most from these exercises if you have some familiarity with:
 
-## Lab Setup
-
-The lab setup process is almost entirely automated and leverages the **Cisco CSR 1000v devices** in the WWT [Programmability Foundations Lab](https://www.wwt.com/lab/programmability-foundations-lab).
-
-:clock1:  **Plan for the automated lab setup to take 5-10 minutes**.  Follow these steps to setup the lab environment:
-
-1. Launch a new copy of the [Programmability Foundations Lab](https://www.wwt.com/lab/programmability-foundations-lab) and click [View Labs](https://www.wwt.com/my-wwt/labs):
-
-![2_launch_lab](_images/2_launch_lab.png)
-
-2. From the [My Labs](https://www.wwt.com/my-wwt/labs) page, click **Access Lab**:
-
-![3_access_lab](_images/3_access_lab.png)
-
-3. Click the **Open in ATC Lab Gateway** button:
-
-![4_open_lab](_images/4_open_lab.png)
-
-4. Click the System Tray icon and mouse over the **Docker icon** to reveal the status.
-   - :clock1:  The icon may take a minute or so to appear.
-
-![5_wait_for_docker](_images/5_wait_for_docker.png)
-
-5. The Docker service is ready when a small exclamation point appears over the **Docker icon**.
-   - :clock1:  It may be a few minutes before the Docker service is ready
-
-![6_docker_startup_complete](_images/6_docker_startup_complete.png)
+- :snake: Python fundamentals.
+- :scroll: Managing and transposing structured data between XML and Python objects.
+- :desktop_computer: Interpreting YANG models.
 
 ---
 
-:heavy_exclamation_mark: Occasionally, the Docker Desktop service does not start on its own.  Windows may ask you if you want to start the Docker service and thereafter request permission for **Net Command​** to run.  You may safely confirm both actions.
+## Usage
 
-![15_start_docker](_images/15_start_docker.png)
-
-![16_start_docker_uac](_images/16_start_docker_uac.png)
-
----
-
-6. A PowerShell script will customize the lab environment automatically although and you need to paste a long command into a PowerShell window in order to start that process.
-   - Click the PowerShell icon in the task bar to open a new PowerShell window.  Then, copy the entire command below to your clipboard, **right-click** in the PowerShell window to paste the command, and press your *Return/Enter* key to run the command:
-
-```powershell
-Set-Executionpolicy -Scope CurrentUser -ExecutionPolicy UnRestricted -Force; Set-Location \Users\admin; Invoke-WebRequest -Uri 'https://devasc-netconf.s3-us-west-2.amazonaws.com/setup_lab.ps1' -OutFile 'setup_lab.ps1’; .\setup_lab.ps1
-```
-
-![7_paste_ps_commands](_images/7_paste_ps_commands.png)
-
- :bangbang: If the PowerShell script exits with a message indicating that the **Docker process is not started**, refer to the **Troubleshooting** section at the bottom of this document .
-
-7. :clock1:  Within a few minutes, when the lab is ready to use, a Chrome browser will open a **JupyterLab** URL.
-   - Open the folder **devasc-netconf-intro**.
-
-![9_jupyter_nav_1](_images/9_jupyter_nav_1.png)
-
-8. Next, open the **lab** folder.
-
-![10_jupyter_nav_2](_images/10_jupyter_nav_2.png)
-
-9. Open the **Jupyter Notebook** file named **ncclient.ipynb**
-
-![11_jupyter_nav_3](_images/11_jupyter_nav_3.png)
-
-10. The NETCONF lab walkthrough guide will open and JupyterLab deployed correctly.
-
-![12_jupyter_nav_4](_images/12_jupyter_nav_4.png)
-
-11. The PowerShell script will continue to run, behind the Chrome browser window, and deploy the **YANG Suite** application.
-
-    - When the YANG Suite deployment completes, a second Chrome browser tab will open.
-
-      :bangbang: You do **not** need to log on to YANG Suite at this time.
-
-    - :white_check_mark:  The automated lab setup should be complete and the PowerShell window will display a message to indicate whether or not setup was successful.
-
-![13_yang_suite_login](_images/13_yang_suite_login.png)
-
-12. The setup process creates a two shortcuts on the Windows desktop which will help you restore the lab environment, in the event the Chrome tab closes, Windows restarts, etc.
-
-    - The **Restart Lab** shortcut re-launches JupyterLab (including the Chrome browser tab), which takes a few seconds, and does not restart the entire 5-10 minute lab configuration process.
-    - The YANG Suite shortcut will reopen the YANG Suite Chrome browser tab.
-
-:large_orange_diamond:  **Double-clicking these links will NOT cause you to lose any of your lab progress** :large_orange_diamond:
-
-![14_lab_restart](_images/14_lab_restart.png)
-
----
-
-## Docker Troubleshooting
-
-From time-to-time, Windows takes a lenghty amount of time to successfully start the Docker Desktop process and rarely, Windows will fail to start Docker Desktop.  If Windows cannot start Docker Desktop, your first indication will be an error message when you run the PowerShell script which configures the lab.
-
-![17_start_docker_error](_images/17_start_docker_error.png)
-
-As the error message indicates, PowerShell will attempt to start or restart the Docker Desktop process.  After a few seconds, the Docker Desktop application will open behind the PowerShell and you may bring it to the foreground to monitor the status.
-
-- A **teal**-colored icon in the lower-left corner of the Docker Desktop application indicates the Docker process is running and you should be able to re-run the PowerShell script to configure the lab environment.  Sometimes, Windows takes 5-10 minutes to start the Docker process.
-- An **orange**-colored icon in the lower-left corner of the Docker Desktop application indicates the Docker process is **not** running and you have a couple of options:
-  - Wait up to 10 minutes to see if Windows is able to start the Docker process.
-  - Launch a new instance of the [Programmability Foundations Lab](https://www.wwt.com/lab/programmability-foundations-lab).
-
-![18_docker_status](_images/18_docker_status.png)
+Navigate to [https://wwt.github.io/devasc-netconf-intro](https://wwt.github.io/devasc-netconf-intro) and follow the guided walkthrough instructions.
