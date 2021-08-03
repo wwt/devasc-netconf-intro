@@ -3,7 +3,7 @@
 *[APIs]: Application Programming Interfaces
 *[CLI]: Command Line Interface
 *[DNA]: Cisco Digital Network Architecture
-*[DNA]: Cisco DNA Center
+*[DNAC]: Cisco DNA Center
 *[HTTP]: Hypertext Transfer Protocol
 *[HTTPS]: Hypertext Transfer Protocol Secure
 *[IDE]: Integrated Development Environment
@@ -21,3 +21,4 @@
 *[TLS]: Transport Layer Security
 *[XML]: eXtensible Markup Language
 *[YAML]: YAML Ain't Markup Language
+*[YANG]: Yet Another Next Generation
