@@ -2,162 +2,153 @@
 
 ## :fontawesome-solid-flask: Lab Overview
 
-The lab environment runs in a Docker Container which hosts a web-based, interactive Python environment called [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/getting_started/overview.html "JupyterLab Overview & User Guide"){target=_blank}.  The JupyterLab server will allow you to work through a series of Python-based, **NETCONF** exercises using a web browser.
+The lab environment runs in the [WWT Programmability Foundations On-Demand Lab](https://www.wwt.com/lab/programmability-foundations-lab "WWT Programmability Foundations On-Demand Lab"){target=_blank} using an MDP exploration tool called [YANG Suite](https://developer.cisco.com/yangsuite/ "YANG Suite Home Page"){target=_blank} and a web-based, interactive Python environment called [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/getting_started/overview.html "JupyterLab Overview & User Guide"){target=_blank}.
+
+- YANG Suite will allow you to explore YANG models and construct NETCONF RPC messages bodies using a web browser.
+- JupyterLab will allow you to work through a series of YANG Suite tasks plus several Python-based **NETCONF** exercises using a web browser.
 
 ---
 
-### :fontawesome-brands-docker: Lab Requirements
+### :fontawesome-solid-flask: Lab Requirements
 
 You only need a few things to start working through the labs:
 
-1. A Docker runtime environment.
+1. :fontawesome-brands-chrome: A computer with the [Google Chrome](https://www.google.com/chrome/ "Google Chrome Download"){target=_blank} web browser.
 
-    - [Docker Desktop for Windows or macOS](https://www.docker.com/products/docker-desktop "Docker Desktop for Windows or macOS"){target=_blank}, [Docker for Linux](https://hub.docker.com/search?offering=community&operating_system=linux&q=&type=edition "Docker for Linux"){target=_blank}, etc.
+    - We test access to the lab environment with Chrome, and you may experience issues with other web browsers.
 
-2. A web browser with [JupyterLab support](https://jupyterlab.readthedocs.io/en/stable/getting_started/installation.html#supported-browsers "JupyterLab Supported Browsers"){target=_blank}.
+2. :material-earth-plus: An account on [wwt.com](https://www.wwt.com/login "World Wide Technology Digital Platform Login"){target=_blank}.
 
 ---
 
 ## :material-beaker: Lab Setup Instructions
 
-We provide instructions for three different lab setup options.  Choose the option that best suits your needs and then follow the step-by-step directions:
+The lab setup process is mostly automated although you will have to manually:
 
-???+ abstract "Lab Setup Options"
+1. :fontawesome-solid-laptop-code: launch a lab environment instance.
+2. :material-powershell: Use a command to initiate the automated lab build.
 
-    1. :fontawesome-solid-laptop-code: **Auto-provision the environment in the [WWT Programmability Foundations On-Demand Lab](https://www.wwt.com/lab/programmability-foundations-lab "WWT Programmability Foundations On-Demand Lab"){target=_blank}.**
-        - The best chioce if you don't have a place to install and run Docker or if you need an on-demand learning and test environment.
+???+ abstract "Auto-provision the environment in the WWT Programmability Foundations Lab"
 
-    2. :fontawesome-brands-docker: **Run a pre-built Container in your own Docker runtime environment.**
-        - The best choice if you want the quickest lab setup experience and ideal if you already have Docker running in your development environment.
+    ???+ todo "Step 1"
 
-    3. :material-microsoft-visual-studio-code: **Use the Visual Studio Code Development Container in the [Git Repository](https://github.com/wwt/devasc-data-formats "DEVASC Data Formats Git Repository"){target=_blank}.**
-        - The best choice if you want an easy environment to both run the lab and also to access or modify source files.
+        Launch a new copy of the [WWT Programmability Foundations On-Demand Lab](https://www.wwt.com/lab/programmability-foundations-lab "WWT Programmability Foundations On-Demand Lab"){target=_blank} and click [View Labs](https://www.wwt.com/my/labs "My WWT Labs"){target=_blank}:
 
-    ???+ example "Auto-provision the environment in the WWT Programmability Foundations Lab"
+        [![1_launch_lab](../images/pf_lab/1_launch_lab.png "Launch a New Programmability Foundations Lab Instance")](../images/pf_lab/1_launch_lab.png){target=_blank}
 
-        ???+ todo "Step 1"
+    ??? todo "Step 2"
 
-            Launch a new copy of the [WWT Programmability Foundations On-Demand Lab](https://www.wwt.com/lab/programmability-foundations-lab "WWT Programmability Foundations On-Demand Lab"){target=_blank} and click [View Labs](https://www.wwt.com/my/labs "My WWT Labs"){target=_blank}:
+        From the [My Labs](https://www.wwt.com/my-wwt/labs "My WWT Labs"){target=_blank} page, click **Access Lab**:
 
-            [![1_launch_lab](../images/pf_lab/1_launch_lab.png "Launch a New Programmability Foundations Lab Instance")](../images/pf_lab/1_launch_lab.png){target=_blank}
+        [![2_access_lab](../images/pf_lab/2_access_lab.png "My WWT Labs")](../images/pf_lab/2_access_lab.png){target=_blank}
 
-        ??? todo "Step 2"
+    ??? todo "Step 3"
 
-            From the [My Labs](https://www.wwt.com/my-wwt/labs "My WWT Labs"){target=_blank} page, click **Access Lab**:
+        Click the **Open in ATC Lab Gateway button**:
 
-            [![2_access_lab](../images/pf_lab/2_access_lab.png "My WWT Labs")](../images/pf_lab/2_access_lab.png){target=_blank}
+        [![3_open_lab](../images/pf_lab/3_open_lab.png "Open The Lab in the ATC Gateway")](../images/pf_lab/3_open_lab.png){target=_blank}
 
-        ??? todo "Step 3"
+    ??? todo "Step 4"
 
-            Click the **Open in ATC Lab Gateway button**:
+        If prompted, log on with your [wwt.com Platform Account Credentials](https://www.wwt.com/login "WWT.com Platform Login"){target=_blank}:
 
-            [![3_open_lab](../images/pf_lab/3_open_lab.png "Open The Lab in the ATC Gateway")](../images/pf_lab/3_open_lab.png){target=_blank}
+        [![4_lab_authenticate](../images/pf_lab/4_lab_authenticate.png "Log On to WWT.com")](../images/pf_lab/4_lab_authenticate.png){target=_blank}
 
-        ??? todo "Step 4"
+    ??? todo "Step 5"
 
-            If prompted, log on with your [WWT.com Platform Account Credentials](https://www.wwt.com/login "WWT.com Platform Login"){target=_blank}:
+        Click the **System Tray icon** and mouse over the **Docker icon** to reveal the service status:
 
-            [![4_lab_authenticate](../images/pf_lab/4_lab_authenticate.png "Log On to WWT.com")](../images/pf_lab/4_lab_authenticate.png){target=_blank}
+        !!! attention
+            The icon may take a minute or so to appear.
 
-        ??? todo "Step 5"
+        [![5_wait_for_docker](../images/pf_lab/5_wait_for_docker.png "Wait For the Docker for Windows Service to Start")](../images/pf_lab/5_wait_for_docker.png){target=_blank}
 
-            Click the **System Tray icon** and mouse over the **Docker icon** to reveal the service status:
+    ??? todo "Step 6"
 
-            !!! attention
-                The icon may take a minute or so to appear.
+        The Docker service is ready when a small exclamation point appears over the **Docker icon**:
 
-            [![5_wait_for_docker](../images/pf_lab/5_wait_for_docker.png "Wait For the Docker for Windows Service to Start")](../images/pf_lab/5_wait_for_docker.png){target=_blank}
+        !!! attention
+            It may be a few minutes before the Docker service is ready.
 
-        ??? todo "Step 6"
+        [![6_docker_startup_complete](../images/pf_lab/6_docker_startup_complete.png "Confirm the Docker for Windows Service Status")](../images/pf_lab/6_docker_startup_complete.png){target=_blank}
 
-            The Docker service is ready when a small exclamation point appears over the **Docker icon**:
+        ???+ danger "Important"
+            Occasionally, the Docker Desktop service does not start on its own. Windows may ask you if you want to start the Docker service and then request permission for Net Command​ to run. You may safely confirm both actions.
 
-            !!! attention
-                It may be a few minutes before the Docker service is ready.
+            [![13_start_docker](../images/pf_lab/13_start_docker.png "Manually Start the Docker for Windows Service")](../images/pf_lab/13_start_docker.png){target=_blank}
 
-            [![6_docker_startup_complete](../images/pf_lab/6_docker_startup_complete.png "Confirm the Docker for Windows Service Status")](../images/pf_lab/6_docker_startup_complete.png){target=_blank}
+            [![14_start_docker_uac](../images/pf_lab/14_start_docker_uac.png "Allow Net Command to Run")](../images/pf_lab/14_start_docker_uac.png){target=_blank}
 
-            ???+ danger "Important"
-                Occasionally, the Docker Desktop service does not start on its own. Windows may ask you if you want to start the Docker service and then request permission for Net Command​ to run. You may safely confirm both actions.
+    ??? todo "Step 7"
 
-                [![14_start_docker](../images/pf_lab/14_start_docker.png "Manually Start the Docker for Windows Service")](../images/pf_lab/14_start_docker.png){target=_blank}
+        A PowerShell script will customize the lab environment automatically although and you need to paste a long command into a PowerShell window to start that process:
 
-                [![15_start_docker_uac](../images/pf_lab/15_start_docker_uac.png "Allow Net Command to Run")](../images/pf_lab/15_start_docker_uac.png){target=_blank}
+        !!! tip
+            1. Click the PowerShell icon in the taskbar to open a new PowerShell window.
+            2. Then, copy the entire command below to your clipboard.
+            3. Right-click in the PowerShell window to paste the command
+            4. Press your ++enter++ or ++"Return"++ key to run the command.
 
-        ??? todo "Step 7"
+            ```powershell
+            Set-Executionpolicy -Scope CurrentUser -ExecutionPolicy UnRestricted -Force; Set-Location \Users\admin; Invoke-WebRequest -Uri 'https://devasc-netconf.s3-us-west-2.amazonaws.com/setup_lab.ps1' -OutFile 'setup_lab.ps1’; .\setup_lab.ps1
+            ```
 
-            A PowerShell script will customize the lab environment automatically although and you need to paste a long command into a PowerShell window to start that process:
+            [![7_paste_ps_commands](../images/pf_lab/7_paste_ps_commands.png "Copy, Paste, & Run the Commands into a PowerShell Window")](../images/pf_lab/7_paste_ps_commands.png){target=_blank}
 
-            !!! tip
-                1. Click the PowerShell icon in the taskbar to open a new PowerShell window.
-                2. Then, copy the entire command below to your clipboard.
-                3. Right-click in the PowerShell window to paste the command
-                4. Press your ++enter++ or ++"Return"++ key to run the command.
+        ??? error "What to do if you see a 'Docker Desktop process is not running' error message:"
 
-                ```powershell
-                Set-Executionpolicy -Scope CurrentUser -ExecutionPolicy UnRestricted -Force; Set-Location \Users\admin; Invoke-WebRequest -Uri 'https://devasc-netconf.s3-us-west-2.amazonaws.com/setup_lab.ps1' -OutFile 'setup_lab.ps1’; .\setup_lab.ps1
-                ```
+            - From time to time, the Windows desktop in this lab takes a lengthy amount of time to successfully start the Docker Desktop process and, rarely, Windows will fail to start Docker Desktop. If Windows cannot start Docker Desktop, your first indication will be an error message when you run the PowerShell script that configures the lab.
 
-                [![7_paste_ps_commands](../images/pf_lab/7_paste_ps_commands.png "Copy, Paste, & Run the Commands into a PowerShell Window")](../images/pf_lab/7_paste_ps_commands.png){target=_blank}
+                [![15_start_docker_error](../images/pf_lab/15_start_docker_error.png "Docker Process Not Running Error")](../images/pf_lab/15_start_docker_error.png){target=_blank}
 
-            ??? error "What to do if you see a 'Docker Desktop process is not running' error message:"
+                ---
 
-                - From time to time, the Windows desktop in this lab takes a lengthy amount of time to successfully start the Docker Desktop process and, rarely, Windows will fail to start Docker Desktop. If Windows cannot start Docker Desktop, your first indication will be an error message when you run the PowerShell script that configures the lab.
+            ???+ attention "Docker for Windows Process Status"
 
-                    [![16_start_docker_error](../images/pf_lab/16_start_docker_error.png "Docker Process Not Running Error")](../images/pf_lab/16_start_docker_error.png){target=_blank}
+                - As the PowerShell error message indicates, PowerShell will attempt to start or restart the Docker Desktop process. After a few seconds, the Docker Desktop application will open behind the PowerShell window, and you may bring it to the foreground to monitor the status.
+                
+                - ==A teal-colored icon== in the lower-left corner of the Docker Desktop application indicates the Docker process is running and you should be able to re-run the PowerShell script to configure the lab environment. Sometimes, Windows takes 5-10 minutes to start the Docker process.
 
-                    ---
+                - ==An orange-colored icon== in the lower-left corner of the Docker Desktop application indicates the Docker process is not running and you have a couple of options:
 
-                ???+ attention "Docker for Windows Process Status"
+                    1. Wait for around 10 minutes to see if Windows can start the Docker process.
+                    2. Launch a new instance of the [WWT Programmability Foundations On-Demand Lab](https://www.wwt.com/lab/programmability-foundations-lab "WWT Programmability Foundations On-Demand Lab"){target=_blank}.
 
-                    - As the PowerShell error message indicates, PowerShell will attempt to start or restart the Docker Desktop process. After a few seconds, the Docker Desktop application will open behind the PowerShell window, and you may bring it to the foreground to monitor the status.
-                    
-                    - ==A teal-colored icon== in the lower-left corner of the Docker Desktop application indicates the Docker process is running and you should be able to re-run the PowerShell script to configure the lab environment. Sometimes, Windows takes 5-10 minutes to start the Docker process.
+                [![16_docker_status](../images/pf_lab/16_docker_status.png "Docker for Windows Process Status Check")](../images/pf_lab/16_docker_status.png){target=_blank}
 
-                    - ==An orange-colored icon== in the lower-left corner of the Docker Desktop application indicates the Docker process is not running and you have a couple of options:
+    ??? todo "Step 8"
 
-                        1. Wait for around 10 minutes to see if Windows can start the Docker process.
-                        2. Launch a new instance of the [WWT Programmability Foundations On-Demand Lab](https://www.wwt.com/lab/programmability-foundations-lab "WWT Programmability Foundations On-Demand Lab"){target=_blank}.
+        Wait a few minutes for the automated lab setup to complete:
 
-                    [![17_docker_status](../images/pf_lab/17_docker_status.png "Docker for Windows Process Status Check")](../images/pf_lab/17_docker_status.png){target=_blank}
+        [![8_jupyter_setup](../images/pf_lab/8_jupyter_setup.png "Wait For Automated Lab Setup to Complete")](../images/pf_lab/8_jupyter_setup.png){target=_blank}
 
-        ??? todo "Step 8"
+    ??? todo "Step 9"
 
-                Wait a few minutes for the automated lab setup to complete:
+        Within a few minutes, when the lab is ready to use, a Chrome browser will open a **JupyterLab URL**.  Open the **devasc-netconf-intro** folder from the navigation pane:
 
-            [![8_jupyter_setup](../images/pf_lab/8_jupyter_setup.png "Wait For Automated Lab Setup to Complete")](../images/pf_lab/8_jupyter_setup.png){target=_blank}
+        [![9_jupyter_nav_1](../images/pf_lab/9_jupyter_nav_1.png "Open the 'devasc-netconf-intro' folder")](../images/pf_lab/9_jupyter_nav_1.png){target=_blank}
 
-        ??? todo "Step 9"
+    ??? todo "Step 10"
 
-                Within a few minutes, when the lab is ready to use, a Chrome browser will open a **JupyterLab URL**.  Open the **devasc-data-formats** folder from the navigation pane:
+        Next, open the **lab** folder:
 
-            [![9_jupyter_nav_1](../images/pf_lab/9_jupyter_nav_1.png "Open the 'devasc-data-formats' folder")](../images/pf_lab/9_jupyter_nav_1.png){target=_blank}
+        [![10_jupyter_nav_2](../images/pf_lab/10_jupyter_nav_2.png "Open the 'lab' folder")](../images/pf_lab/10_jupyter_nav_2.png){target=_blank}
 
-        ??? todo "Step 10"
+    ??? todo "Step 11"
 
-            Next, open the **lab** folder:
+        Open the file **python.ipynb** and follow the step-by-step instructions in the main pane:
 
-            [![10_jupyter_nav_2](../images/pf_lab/10_jupyter_nav_2.png "Open the 'lab' folder")](../images/pf_lab/10_jupyter_nav_2.png){target=_blank}
+        [![11_jupyter_nav_3](../images/pf_lab/11_jupyter_nav_3.png "Open the file 'python.ipynb'")](../images/pf_lab/11_jupyter_nav_3.png){target=_blank}
 
-        ??? todo "Step 11"
+    ??? help "Lab Restart Instructions"
 
-            Open the **part_i_python** folder:
+        The lab setup process creates two shortcuts on the Windows desktop, which will help you restore the lab environment in the event the JupyterLab or YANG Suite browser tabs close, Windows restarts, etc.
 
-            [![11_jupyter_nav_3](../images/pf_lab/11_jupyter_nav_3.png "Open the 'part_i_python' folder")](../images/pf_lab/11_jupyter_nav_3.png){target=_blank}
+        !!! attention "Notice"
 
-        ??? todo "Step 12"
+            - The **Restart Lab** and **YANG Suite** shortcuts re-launch JupyterLab or YANG Suite, respectively (including the Chrome browser tabs), within a few seconds.
+            - Double-clicking these shortcuts will **NOT** cause you to lose any of your lab progress.
 
-                Open the file **python.ipynb** and follow the step-by-step instructions in the main pane:
+        [![12_lab_restart](../images/pf_lab/12_lab_restart.png "Use the Lab Restart and YANG Suite Shortcuts")](../images/pf_lab/12_lab_restart.png){target=_blank}
 
-            [![12_jupyter_nav_4](../images/pf_lab/12_jupyter_nav_4.png "Open the file 'python.ipynb'")](../images/pf_lab/12_jupyter_nav_4.png){target=_blank}
-
-        ??? help "Lab Restart Instructions"
-
-            The lab setup process creates a shortcut on the Windows desktop, which will help you restore the lab environment in the event the JupyterLab browser tab closes, Windows restarts, etc.
-
-            !!! attention "Notice"
-
-                - The **Restart Lab** shortcut re-launches JupyterLab (including the Chrome browser tab) and will only take a few seconds to complete.
-                - Double-clicking this shortcut will **NOT** cause you to lose any of your lab progress.
-
-            [![13_lab_restart](../images/pf_lab/13_lab_restart.png "Open the 'Shortcut to Restart the Lab' folder")](../images/pf_lab/13_lab_restart.png){target=_blank}
+--8<-- "includes/glossary.txt"
