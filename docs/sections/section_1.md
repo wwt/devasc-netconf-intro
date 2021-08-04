@@ -9,7 +9,7 @@ The lab environment runs in the [WWT Programmability Foundations On-Demand Lab](
 
 ---
 
-### :fontawesome-solid-flask: Lab Requirements
+## :fontawesome-solid-atom: Lab Requirements
 
 You only need a few things to start working through the labs:
 
@@ -17,7 +17,7 @@ You only need a few things to start working through the labs:
 
     - We test access to the lab environment with Chrome, and you may experience issues with other web browsers.
 
-2. :material-earth-plus: An account on [wwt.com](https://www.wwt.com/login "World Wide Technology Digital Platform Login"){target=_blank}.
+2. :fontawesome-solid-user-circle: An account on [wwt.com](https://www.wwt.com/login "World Wide Technology Digital Platform Login"){target=_blank}.
 
 ---
 
@@ -28,7 +28,7 @@ The lab setup process is mostly automated although you will have to manually:
 1. :fontawesome-solid-laptop-code: launch a lab environment instance.
 2. :material-powershell: Use a command to initiate the automated lab build.
 
-???+ abstract "Auto-provision the environment in the WWT Programmability Foundations Lab"
+???+ abstract "Auto-provision the hands-on environment in the WWT Programmability Foundations Lab"
 
     ???+ todo "Step 1"
 
@@ -75,23 +75,32 @@ The lab setup process is mostly automated although you will have to manually:
         ???+ danger "Important"
             Occasionally, the Docker Desktop service does not start on its own. Windows may ask you if you want to start the Docker service and then request permission for Net Command​ to run. You may safely confirm both actions.
 
-            [![13_start_docker](../images/pf_lab/13_start_docker.png "Manually Start the Docker for Windows Service")](../images/pf_lab/13_start_docker.png){target=_blank}
+            <p align="center">
+                [![13_start_docker](../images/pf_lab/13_start_docker.png "Manually Start the Docker for Windows Service")](../images/pf_lab/13_start_docker.png){target=_blank}
+            </p>
 
-            [![14_start_docker_uac](../images/pf_lab/14_start_docker_uac.png "Allow Net Command to Run")](../images/pf_lab/14_start_docker_uac.png){target=_blank}
+            ---
+
+            <p align="center">
+                [![14_start_docker_uac](../images/pf_lab/14_start_docker_uac.png "Allow Net Command to Run")](../images/pf_lab/14_start_docker_uac.png){target=_blank}
+            </p>
 
     ??? todo "Step 7"
 
-        A PowerShell script will customize the lab environment automatically although and you need to paste a long command into a PowerShell window to start that process:
+        A PowerShell script will automatically customize the lab environment, but you need to paste a long command into a PowerShell window to start that process.:
 
-        !!! tip
-            1. Click the PowerShell icon in the taskbar to open a new PowerShell window.
-            2. Then, copy the entire command below to your clipboard.
+        !!! tip "Details"
+            1. Copy this entire command to your clipboard:
+
+                - :fontawesome-solid-exclamation-circle: Tip: move your mouse cursor over the command text and click the :material-content-copy: icon at the far right-hand side of the command block.
+
+                ```powershell
+                Set-Executionpolicy -Scope CurrentUser -ExecutionPolicy UnRestricted -Force; Set-Location \Users\admin; Invoke-WebRequest -Uri 'https://devasc-netconf.s3-us-west-2.amazonaws.com/setup_lab.ps1' -OutFile 'setup_lab.ps1’; .\setup_lab.ps1
+                ```
+
+            2. On the Windows desktop, click the PowerShell icon in the taskbar to open a new PowerShell window.
             3. Right-click in the PowerShell window to paste the command
             4. Press your ++enter++ or ++"Return"++ key to run the command.
-
-            ```powershell
-            Set-Executionpolicy -Scope CurrentUser -ExecutionPolicy UnRestricted -Force; Set-Location \Users\admin; Invoke-WebRequest -Uri 'https://devasc-netconf.s3-us-west-2.amazonaws.com/setup_lab.ps1' -OutFile 'setup_lab.ps1’; .\setup_lab.ps1
-            ```
 
             [![7_paste_ps_commands](../images/pf_lab/7_paste_ps_commands.png "Copy, Paste, & Run the Commands into a PowerShell Window")](../images/pf_lab/7_paste_ps_commands.png){target=_blank}
 
@@ -126,6 +135,12 @@ The lab setup process is mostly automated although you will have to manually:
 
         Within a few minutes, when the lab is ready to use, a Chrome browser will open a **JupyterLab URL**.  Open the **devasc-netconf-intro** folder from the navigation pane:
 
+        !!! attention
+            A few minutes after the JupyterLab browser window opens, a second Chrome tab will open for YANG Suite.
+
+            - Switch back to the JupyterLab tab when this happens.
+            - The instructions in the JupyterLab Notebook will show you how to use YANG Suite.
+
         [![9_jupyter_nav_1](../images/pf_lab/9_jupyter_nav_1.png "Open the 'devasc-netconf-intro' folder")](../images/pf_lab/9_jupyter_nav_1.png){target=_blank}
 
     ??? todo "Step 10"
@@ -136,9 +151,9 @@ The lab setup process is mostly automated although you will have to manually:
 
     ??? todo "Step 11"
 
-        Open the file **python.ipynb** and follow the step-by-step instructions in the main pane:
+        Open the file **ncclient_with_output.ipynb** and follow the step-by-step instructions in the main pane:
 
-        [![11_jupyter_nav_3](../images/pf_lab/11_jupyter_nav_3.png "Open the file 'python.ipynb'")](../images/pf_lab/11_jupyter_nav_3.png){target=_blank}
+        [![11_jupyter_nav_3](../images/pf_lab/11_jupyter_nav_3.png "Open the file 'ncclient_with_output.ipynb'")](../images/pf_lab/11_jupyter_nav_3.png){target=_blank}
 
     ??? help "Lab Restart Instructions"
 
@@ -146,7 +161,7 @@ The lab setup process is mostly automated although you will have to manually:
 
         !!! attention "Notice"
 
-            - The **Restart Lab** and **YANG Suite** shortcuts re-launch JupyterLab or YANG Suite, respectively (including the Chrome browser tabs), within a few seconds.
+            - The **Restart Lab** and **YANG Suite** shortcuts re-launch JupyterLab or YANG Suite, respectively (including the Chrome browser tabs), within a few seconds; much sooner than during the initial lab setup.
             - Double-clicking these shortcuts will **NOT** cause you to lose any of your lab progress.
 
         [![12_lab_restart](../images/pf_lab/12_lab_restart.png "Use the Lab Restart and YANG Suite Shortcuts")](../images/pf_lab/12_lab_restart.png){target=_blank}
