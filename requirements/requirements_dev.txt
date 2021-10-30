@@ -2,6 +2,9 @@
 mkdocs
 mkdocs-material
 
+# MkDocs Version Management
+pip-tools
+
 # Python packages
 flake8
 ipython
